@@ -1,0 +1,14 @@
+{
+  "template": "Lean Canvas",
+  "sections": {
+    "Problem": "Top 3 problems your target audience faces.",
+    "CustomerSegments": "Who are you solving this for? (Be specific).",
+    "UniqueValueProposition": "Why should they care? What makes you different?",
+    "Solution": "Top 3 features of your MVP.",
+    "Channels": "How will you reach your customers?",
+    "RevenueStreams": "How will you make money? (Subscription, Ads, One-time).",
+    "CostStructure": "Fixed and variable costs.",
+    "KeyMetrics": "How will you measure success? (e.g., Daily Active Users).",
+    "UnfairAdvantage": "What can't be easily copied or bought?"
+  }
+}

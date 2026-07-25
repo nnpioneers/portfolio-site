@@ -1,0 +1,11 @@
+{
+  "industry": "Startup",
+  "setup": "1. Identify problem. 2. MVP definition. 3. Legal incorporation (Private Limited / LLC).",
+  "investment": "Bootstrap: $1k-$5k. Pre-seed: $50k-$200k. Focus on minimal burn rate.",
+  "licenses": "Company Registration, GST/VAT, Intellectual Property (Trademarks).",
+  "staff": "Co-founders (Tech + Business), 1-2 Generalist Engineers, Growth Hacker.",
+  "marketing": "Content marketing, Product Hunt launch, early adopter communities (Reddit, Discord).",
+  "growthStrategy": "Achieve Product-Market Fit. Track CAC (Customer Acquisition Cost) vs LTV (Lifetime Value).",
+  "commonMistakes": "Scaling before Product-Market Fit. Building too many features instead of testing the core value proposition.",
+  "expansionRoadmap": "1. Seed Funding. 2. Hire dedicated sales. 3. Expand geographically."
+}

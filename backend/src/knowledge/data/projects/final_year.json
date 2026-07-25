@@ -1,0 +1,8 @@
+{
+  "category": "Final Year Projects",
+  "domain": "AI / Web Development",
+  "guidance": "1. Pick a problem you personally face. 2. Define MVP scope clearly (don't overcomplicate). 3. Choose a modern tech stack (React/Node/MongoDB or Python/FastAPI).",
+  "presentationTips": "Focus on the 'Why' before the 'How'. Show a live demo instead of just slides. Explain your database schema and architecture.",
+  "githubGuidance": "Use clear commit messages. Have a comprehensive README.md explaining how to run the project locally.",
+  "deployment": "Deploy frontend on Vercel/Netlify. Deploy backend on Render/Railway. Use MongoDB Atlas for free database hosting."
+}
