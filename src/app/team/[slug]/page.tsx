@@ -34,6 +34,40 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const member = getTeamMemberBySlug(slug);
+
+  if (!member) {
+    return {
+      title: "Team Member Not Found | NNP Technologies",
+    };
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-site-nnp.vercel.app';
+  const url = `${baseUrl}/team/${member.slug}`;
+
+  return {
+    title: `${member.name} - ${member.designation} | NNP Technologies`,
+    description: `${member.name} (${member.professionalTitle}) - ${member.designation} at NNP Technologies. ${member.aboutParagraphs[0]}`,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${member.name} | NNP Technologies`,
+      description: `${member.name} - ${member.designation} & ${member.executiveRole} at NNP Technologies.`,
+      url: url,
+      siteName: "NNP Technologies",
+      images: member.image ? [{ url: `${baseUrl}${member.image}` }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${member.name} | NNP Technologies`,
+      description: `${member.name} - ${member.designation} at NNP Technologies.`,
+    },
+  };
+}
+
 export default async function TeamMemberPortfolioPage({ params }: PageProps) {
   const { slug } = await params;
   const member = getTeamMemberBySlug(slug);

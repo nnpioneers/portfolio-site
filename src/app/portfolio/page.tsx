@@ -1,7 +1,21 @@
+import type { Metadata } from 'next';
 import { Briefcase, Activity, ArrowRight, ShoppingBag, Bot, GraduationCap, RefreshCw, BedDouble } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: "Enterprise Portfolio & Case Studies | NNP Technologies",
+  description: "Explore enterprise software case studies by NNP Technologies including MediCare Hospital Management System and HotelPro Management System.",
+  alternates: {
+    canonical: "https://portfolio-site-nnp.vercel.app/portfolio",
+  },
+  openGraph: {
+    title: "Enterprise Portfolio & Case Studies | NNP Technologies",
+    description: "Explore enterprise software case studies by NNP Technologies.",
+    url: "https://portfolio-site-nnp.vercel.app/portfolio",
+  },
+};
 
 export default function PortfolioPage() {
   return (

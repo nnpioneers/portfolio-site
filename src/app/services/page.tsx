@@ -1,8 +1,22 @@
+import type { Metadata } from 'next';
 import { Sparkles, ArrowRight, Layout, AppWindow, Smartphone, Brain, Database, Activity, GraduationCap, PenTool, Rocket, Network, Bot, LayoutDashboard, MessageSquare, Code, ShieldCheck, Check, ChevronDown } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
 import TechStackSection from '@/components/theme/TechStackSection';
 import FAQSection from '@/components/theme/FAQSection';
+
+export const metadata: Metadata = {
+  title: "Services & Custom Engineering Solutions | NNP Technologies",
+  description: "Enterprise web development, custom AI platforms, mobile apps, SaaS engineering, and IT consulting services by NNP Technologies.",
+  alternates: {
+    canonical: "https://portfolio-site-nnp.vercel.app/services",
+  },
+  openGraph: {
+    title: "Services & Custom Engineering Solutions | NNP Technologies",
+    description: "Enterprise web development, custom AI platforms, mobile apps, and IT consulting.",
+    url: "https://portfolio-site-nnp.vercel.app/services",
+  },
+};
 
 export default function ServicesPage() {
   return (

@@ -1,6 +1,20 @@
+import type { Metadata } from 'next';
 import { Info, Target, Eye, Gem, Zap, HeartHandshake, Flag, Rocket, Bot, ArrowRight } from 'lucide-react';
 import React from 'react';
 import TeamSection from '@/components/about/TeamSection';
+
+export const metadata: Metadata = {
+  title: "About Us & Leadership Team | NNP Technologies",
+  description: "Learn about NNP Technologies, our mission, core values, and executive leadership team pioneering enterprise software and AI solutions.",
+  alternates: {
+    canonical: "https://portfolio-site-nnp.vercel.app/about",
+  },
+  openGraph: {
+    title: "About Us & Leadership Team | NNP Technologies",
+    description: "Learn about NNP Technologies, our mission, core values, and executive leadership team.",
+    url: "https://portfolio-site-nnp.vercel.app/about",
+  },
+};
 
 export default function AboutPage() {
   return (
