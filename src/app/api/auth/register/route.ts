@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { DatabaseManager } from '../../../../../backend/src/config/db';
-import { AuthService } from '../../../../../backend/src/services/auth.service';
+import { DatabaseManager } from '@/lib/server/config/db';
+import { AuthService } from '@/lib/server/services/auth.service';
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
 
-    // Set HttpOnly cookie for refresh token
     response.cookies.set('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
