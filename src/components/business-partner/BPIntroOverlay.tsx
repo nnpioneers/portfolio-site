@@ -55,10 +55,10 @@ export default function BPIntroOverlay() {
       <div className="bp-intro-wrap">
         <div className={`bp-intro-logo-img relative w-[72px] h-[72px] ${showContent ? 'vis' : ''}`}>
           <Image 
-            src="/assets/images/logo-transparent.png" 
+            src="/assets/images/nnp-logo-white.jpg" 
             alt="NNP Logo" 
             fill
-            className="object-contain"
+            className="object-cover rounded-2xl"
           />
         </div>
         <div className={`bp-intro-line bp-il-sub ${showContent ? 'vis' : ''}`} style={{ transitionDelay: '0.1s' }}>NNP Digital</div>

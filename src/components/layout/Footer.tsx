@@ -10,9 +10,9 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="text-2xl font-bold tracking-wider flex items-center gap-2 mb-6">
               <img 
-                src="/assets/images/logo-transparent.png" 
+                src="/assets/images/nnp-logo-white.jpg" 
                 alt="NNP Logo" 
-                className="h-8 w-auto"
+                className="h-8 w-8 rounded-lg object-cover"
               />
               <span>Network Navigator Pioneers</span>
             </Link>

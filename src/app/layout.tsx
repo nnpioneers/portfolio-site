@@ -76,6 +76,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/assets/images/nnp-logo-white.jpg',
+  },
 };
 
 export default function RootLayout({
@@ -89,7 +94,7 @@ export default function RootLayout({
     "name": "NNP Technologies",
     "alternateName": "NNP Digital Solutions",
     "url": baseUrl,
-    "logo": `${baseUrl}/images/logo-transparent.png`,
+    "logo": `${baseUrl}/assets/images/nnp-logo-white.jpg`,
     "description": "NNP Technologies is a premier digital innovation agency specializing in enterprise web applications, AI automation, custom software, and full-stack solutions.",
     "email": "moahmeedmohai2020@gmail.com",
     "founder": [
@@ -119,6 +124,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/assets/images/nnp-logo-white.jpg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

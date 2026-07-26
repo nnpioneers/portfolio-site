@@ -105,9 +105,9 @@ export default function Preloader() {
                 <div id="loader-aura" className="absolute inset-0 bg-white/5 blur-3xl rounded-full scale-150 opacity-0"></div>
                 <img 
                     id="loader-logo" 
-                    src="/assets/images/logo-transparent.png" 
+                    src="/assets/images/nnp-logo-white.jpg" 
                     alt="NNP Logo" 
-                    className="h-48 md:h-64 w-auto relative z-10 filter drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] opacity-0 scale-[0.6] animate-[pulseGlow_3s_cubic-bezier(0.4,0,0.6,1)_infinite]" 
+                    className="h-44 md:h-56 w-auto rounded-2xl object-cover relative z-10 filter drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] opacity-0 scale-[0.6] animate-[pulseGlow_3s_cubic-bezier(0.4,0,0.6,1)_infinite]" 
                 />
             </div>
             <div id="loader-text-container" className="h-8 relative flex items-center justify-center overflow-hidden w-full">

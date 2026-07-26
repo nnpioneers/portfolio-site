@@ -61,9 +61,9 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between glass-nav rounded-2xl px-4 sm:px-6 py-3">
           <Link href="/" onClick={closeMobileMenu} className="flex items-center gap-3 group">
             <img 
-              src="/assets/images/logo-transparent.png" 
+              src="/assets/images/nnp-logo-white.jpg" 
               alt="NNP Logo" 
-              className="h-8 w-auto filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300"
+              className="h-8 w-8 rounded-lg object-cover filter drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300"
             />
             <span className="text-xl font-bold tracking-tight">NNP</span>
           </Link>
@@ -163,9 +163,9 @@ export default function Navbar() {
           <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
             <Link href="/" onClick={closeMobileMenu} className="flex items-center gap-3">
               <img 
-                src="/assets/images/logo-transparent.png" 
+                src="/assets/images/nnp-logo-white.jpg" 
                 alt="NNP Logo" 
-                className="h-8 w-auto filter drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                className="h-8 w-8 rounded-lg object-cover filter drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
               />
               <span className="text-xl font-bold tracking-tight text-white">NNP</span>
             </Link>
