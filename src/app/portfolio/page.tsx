@@ -55,51 +55,40 @@ export default function PortfolioPage() {
       {/* Portfolio Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
 
-        {/* Flagship Product: AI Business Partner */}
-        <div className="md:col-span-2 glass-card rounded-3xl overflow-hidden group service-card border border-purple-500/30 hover:border-purple-500/60 transition-all duration-500 shadow-[0_0_35px_rgba(139,92,246,0.15)]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-7 h-72 lg:h-96 bg-slate-950 relative overflow-hidden flex items-center justify-center">
-              <Image
-                src="/images/ai-business-partner-card.png"
-                alt="AI Business Partner Platform"
-                fill
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3.5 py-1.5 rounded-full bg-purple-500/20 backdrop-blur-md border border-purple-400/40 text-purple-300 text-xs font-bold tracking-wider uppercase flex items-center gap-1.5 shadow-lg">
-                  <Star className="w-3.5 h-3.5 text-amber-300 fill-amber-300" /> ⭐ NNP Flagship Product | Built In-House
-                </span>
-              </div>
+        {/* Project 1: AI Business Partner (Flagship Product) */}
+        <div className="glass-card rounded-3xl overflow-hidden group service-card border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 shadow-[0_0_25px_rgba(139,92,246,0.15)]">
+          <div className="h-64 bg-slate-900 relative overflow-hidden flex items-center justify-center">
+            <Image
+              src="/images/ai-business-partner-card.png"
+              alt="AI Business Partner Platform"
+              fill
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              unoptimized
+            />
+            <div className="absolute top-3 left-3 z-10">
+              <span className="px-3 py-1 rounded-full bg-purple-500/20 backdrop-blur-md border border-purple-400/40 text-purple-300 text-[10px] font-bold tracking-wider uppercase flex items-center gap-1 shadow-lg">
+                <Star className="w-3 h-3 text-amber-300 fill-amber-300" /> ⭐ NNP Flagship Product | Built In-House
+              </span>
             </div>
-            <div className="lg:col-span-5 p-8 lg:p-10 flex flex-col justify-between h-full">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-bold tracking-widest text-purple-400 uppercase">NNP FLAGSHIP PRODUCT</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
-                  <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">AI PLATFORM</span>
-                </div>
-                <h3 className="text-3xl font-bold mb-3 text-white">AI Business Partner</h3>
-                <p className="text-gray-300 font-body text-sm mb-6 leading-relaxed">
-                  An intelligent AI-powered business companion that helps entrepreneurs, startups, and enterprises plan, analyze, automate, and grow their businesses through real-time conversations and actionable insights.
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <Link 
-                  href="/portfolio/ai-business-partner" 
-                  className="btn-magnetic group relative overflow-hidden rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-6 py-3 font-semibold text-sm transition-all hover:scale-105 flex items-center gap-2 shadow-[0_0_20px_rgba(139,92,246,0.4)]"
-                >
-                  <span>View Details</span> <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link 
-                  href="/business-partner" 
-                  className="px-5 py-3 rounded-full border border-white/15 text-gray-300 hover:text-white hover:bg-white/10 text-xs font-medium transition-colors"
-                >
-                  Try Live Demo 🚀
-                </Link>
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span className="px-4 py-1.5 rounded-full bg-purple-600/80 backdrop-blur-md text-white text-xs font-bold tracking-widest uppercase">
+                View Case Study
+              </span>
             </div>
+          </div>
+          <div className="p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-xs font-bold tracking-widest text-purple-400 uppercase">NNP FLAGSHIP PRODUCT</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
+              <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">AI PLATFORM</span>
+            </div>
+            <h3 className="text-2xl font-bold mb-3 text-white">AI Business Partner</h3>
+            <p className="text-gray-400 font-body text-sm mb-6 line-clamp-2">
+              An intelligent AI-powered business companion that helps entrepreneurs, startups, and enterprises plan, analyze, automate, and grow their businesses through real-time conversations and actionable insights.
+            </p>
+            <Link href="/portfolio/ai-business-partner" className="text-purple-400 font-medium flex items-center gap-2 text-sm group-hover:underline">
+              View Details <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
 
