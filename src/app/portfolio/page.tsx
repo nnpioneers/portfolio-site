@@ -34,20 +34,20 @@ export default function PortfolioPage() {
       </div>
 
       {/* Category Filters */}
-      <div className="flex flex-wrap justify-center gap-4 mb-16 service-card">
-        <button className="px-6 py-2 rounded-full border border-secondary bg-secondary text-black font-medium text-sm transition-colors">
+      <div className="flex overflow-x-auto whitespace-nowrap scrollbar-none flex-nowrap md:flex-wrap justify-start md:justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 pb-2 px-1 service-card">
+        <button className="shrink-0 px-5 sm:px-6 py-2 rounded-full border border-secondary bg-secondary text-black font-medium text-xs sm:text-sm transition-colors">
           All Projects
         </button>
-        <button className="px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-sm transition-colors">
+        <button className="shrink-0 px-5 sm:px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-xs sm:text-sm transition-colors">
           Hotel & Web Apps
         </button>
-        <button className="px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-sm transition-colors">
+        <button className="shrink-0 px-5 sm:px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-xs sm:text-sm transition-colors">
           Mobile Apps
         </button>
-        <button className="px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-sm transition-colors">
+        <button className="shrink-0 px-5 sm:px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-xs sm:text-sm transition-colors">
           AI Solutions
         </button>
-        <button className="px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-sm transition-colors">
+        <button className="shrink-0 px-5 sm:px-6 py-2 rounded-full border border-white/10 text-gray-300 hover:border-secondary hover:text-secondary font-medium text-xs sm:text-sm transition-colors">
           Enterprise ERP
         </button>
       </div>
