@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
   ArrowLeft, ExternalLink, CheckCircle2, Layers, Cpu, Database, ShieldCheck, 
   Clock, Users, Sparkles, BarChart3, Lock, TrendingUp, Smartphone, Code2, 
-  Server, GitBranch, Terminal, Globe, Award, Check, X, ZoomIn, Star,
+  Server, GitBranch, Terminal, Globe, Award, Check, X, Star,
   BrainCircuit, Rocket, LineChart, DollarSign, Bot, MessageSquare, Zap,
-  BookOpen, Compass, Shield, Workflow, Layers3, Flame, ArrowRight
+  BookOpen, Compass, Shield, Workflow, Flame, ArrowRight
 } from 'lucide-react';
 
 const CORE_FEATURES = [
@@ -51,66 +51,6 @@ const CORE_FEATURES = [
     icon: Compass,
     title: 'Future AI Modules',
     desc: 'Modular architecture built to integrate voice interaction, document parsing, predictive analytics, and enterprise reporting.'
-  }
-];
-
-interface GalleryItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  image: string;
-  details: string;
-  highlights: string[];
-}
-
-const GALLERY_ITEMS: GalleryItem[] = [
-  { 
-    id: 'landing',
-    title: 'Flagship Landing Page', 
-    subtitle: 'Hero Showcase & Conversion Hub',
-    image: '/images/ai-business-partner-hero.png',
-    details: 'The official landing page for AI Business Partner, designed with an Apple-inspired space aesthetic, glassmorphism card components, and live interactive feature previews.',
-    highlights: ['Hero Product Showcase', 'Live Interactive Chat Widget Mockup', 'Key Metric Highlights & Social Proof', 'One-Click Instant Access CTA']
-  },
-  { 
-    id: 'chat',
-    title: 'AI Chat Interface', 
-    subtitle: 'Context-Aware AI Consultation Console',
-    image: '/images/ai-business-partner-card.png',
-    details: 'The core conversational workspace where users interact with AI Business Partner. Includes real-time message streaming, quick suggestion chips, audio controls, and file attachments.',
-    highlights: ['Real-Time Streaming Responses', 'Context Memory & Persona Switching', 'Quick Analysis Action Chips', 'Clean Dark Glassmorphic Layout']
-  },
-  { 
-    id: 'dashboard',
-    title: 'Executive Dashboard', 
-    subtitle: 'Centralized Business Insights Command',
-    image: '/images/ai-business-partner-hero.png',
-    details: 'A consolidated dashboard providing visual analytics, active conversation history, recent business summaries, and pinned strategic plans.',
-    highlights: ['KPI Metrics & Growth Graphs', 'Saved Strategy Bookmarks', 'Quick Action Shortcut Widgets', 'Multi-Project Switching']
-  },
-  { 
-    id: 'strategy',
-    title: 'Business Strategy Module', 
-    subtitle: 'Automated Roadmap & SWOT Generation',
-    image: '/images/ai-business-partner-card.png',
-    details: 'Generates detailed SWOT analyses, value proposition canvases, competitor matrices, and 90-day execution roadmaps tailored for founders.',
-    highlights: ['Automated SWOT Matrix Generator', 'Competitor Comparison Table', 'Phase-by-Phase Roadmap Timeline', 'Exportable Strategy Briefs']
-  },
-  { 
-    id: 'market',
-    title: 'Market Analysis Module', 
-    subtitle: 'Industry Intelligence & Trend Radar',
-    image: '/images/ai-business-partner-hero.png',
-    details: 'Provides real-world market intelligence, target persona profiling, TAM/SAM/SOM market sizing, and industry growth vectors.',
-    highlights: ['TAM / SAM / SOM Market Sizing', 'Ideal Customer Profile (ICP) Builder', 'Industry Risk Factor Evaluation', 'Live Trend Insights']
-  },
-  { 
-    id: 'mobile',
-    title: 'Mobile View', 
-    subtitle: 'On-the-Go Responsive Advisor',
-    image: '/images/ai-business-partner-card.png',
-    details: 'A fully responsive mobile layout providing founders with instant access to their AI Business Partner from smartphones and tablets with touch-optimized interfaces.',
-    highlights: ['Single-Column Touch Layout', 'Bottom Fixed Chat Input Bar', 'Slide-in Drawer Navigation', 'Lightweight High-Speed Performance']
   }
 ];
 
@@ -171,7 +111,6 @@ const ROADMAP_ITEMS = [
 ];
 
 export default function AIBusinessPartnerCaseStudyPage() {
-  const [selectedGalleryItem, setSelectedGalleryItem] = useState<GalleryItem | null>(null);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -452,107 +391,7 @@ export default function AIBusinessPartnerCaseStudyPage() {
 
       </div>
 
-      {/* Product Showcase Gallery */}
-      <div className="mb-20">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold tracking-widest uppercase mb-3">
-            <Layers3 className="w-3.5 h-3.5" /> Product Gallery
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">Interface Showcase</h2>
-          <p className="text-gray-400 text-sm max-w-xl mx-auto mt-2">
-            Explore the UI modules of NNP&apos;s AI Business Partner platform.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {GALLERY_ITEMS.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedGalleryItem(item)}
-              className="glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer hover:-translate-y-1.5"
-            >
-              <div className="h-52 bg-slate-950 relative overflow-hidden flex items-center justify-center">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
-                <div className="absolute inset-0 bg-purple-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-semibold text-xs uppercase tracking-wider">
-                  <ZoomIn className="w-5 h-5" /> Expand View
-                </div>
-              </div>
-
-              <div className="p-6">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-purple-400 block mb-1">
-                  {item.subtitle}
-                </span>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-gray-400 text-xs line-clamp-2 font-body">
-                  {item.details}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Gallery Lightbox Modal */}
-      {selectedGalleryItem && (
-        <div 
-          className="fixed inset-0 z-[200] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6"
-          onClick={() => setSelectedGalleryItem(null)}
-        >
-          <div 
-            className="glass-card max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border border-purple-500/40 p-6 sm:p-8 relative bg-[#0a0814]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSelectedGalleryItem(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 text-gray-300 hover:text-white hover:bg-white/20 transition-colors z-20"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="relative h-64 sm:h-96 w-full rounded-2xl overflow-hidden mb-6 bg-slate-950">
-              <Image
-                src={selectedGalleryItem.image}
-                alt={selectedGalleryItem.title}
-                fill
-                className="object-cover object-top"
-                unoptimized
-              />
-            </div>
-
-            <span className="text-xs font-bold uppercase tracking-widest text-purple-400 block mb-1">
-              {selectedGalleryItem.subtitle}
-            </span>
-            <h3 className="text-2xl font-bold text-white mb-4">
-              {selectedGalleryItem.title}
-            </h3>
-
-            <p className="text-gray-300 font-body text-sm leading-relaxed mb-6">
-              {selectedGalleryItem.details}
-            </p>
-
-            <div className="bg-white/5 p-4 rounded-xl border border-white/10">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-purple-300 mb-3">Key Features:</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {selectedGalleryItem.highlights.map((h, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-gray-300 font-body">
-                    <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
-                    <span>{h}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Business Benefits */}
       <div className="glass-card p-8 sm:p-12 rounded-3xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 via-transparent to-indigo-500/10 mb-20">
