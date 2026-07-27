@@ -156,7 +156,7 @@ export default async function TeamMemberPortfolioPage({ params }: PageProps) {
           {/* Member Main Header Info */}
           <div className="flex-1 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-xs font-semibold uppercase tracking-wider mb-3">
-              {member.designation} • {member.executiveRole}
+              {member.designation === member.executiveRole ? member.designation : `${member.designation} • ${member.executiveRole}`}
             </div>
 
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-3">

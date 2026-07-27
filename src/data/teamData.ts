@@ -740,7 +740,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: '5',
-    name: 'Reihana Parveen A.',
+    name: 'A. Reihana Parveen',
     slug: 'reihana-parveen',
     designation: 'Manager',
     executiveRole: 'Manager',
