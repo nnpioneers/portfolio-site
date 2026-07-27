@@ -841,7 +841,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       email: 'reihanasalam106@gmail.com',
       phone: '+91 63806 52285',
       location: 'Perambalur, Tamil Nadu, India',
-      linkedin: '',
+      linkedin: 'https://www.linkedin.com/in/reihana-parveen-a-2919ba342?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: ''
     }
   }
