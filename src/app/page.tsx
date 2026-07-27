@@ -168,54 +168,54 @@ export default function Home() {
 
                 <div className="relative">
                     {/* Connecting Line */}
-                    <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block">
+                    <div className="absolute left-1/2 top-6 bottom-6 w-px bg-white/10 -translate-x-1/2 z-0">
                         <div className="absolute top-0 left-0 w-full bg-secondary progress-line" style={{ height: "0%", boxShadow: "0 0 10px rgba(59,130,246,0.5)" }}></div>
                     </div>
 
-                    <div className="space-y-12 md:space-y-24">
+                    <div className="space-y-16 md:space-y-24">
                         {/* Step 1 */}
-                        <div className="flex flex-col md:flex-row items-center justify-between process-step  ">
-                            <div className="w-full md:w-5/12 text-center md:text-right mb-6 md:mb-0 pr-0 md:pr-12">
+                        <div className="flex flex-col md:flex-row items-center justify-between process-step">
+                            <div className="w-full md:w-5/12 text-center md:text-right order-2 md:order-1 mt-4 md:mt-0 pr-0 md:pr-12">
                                 <h4 className="text-2xl font-bold mb-2">Discovery & Planning</h4>
                                 <p className="text-gray-400 font-body text-sm">We deep dive into your vision, target audience, and business goals to map out a strategic blueprint.</p>
                             </div>
-                            <div className="w-12 h-12 rounded-full bg-black border-2 border-secondary relative z-10 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] step-circle transition-colors duration-500">
+                            <div className="w-12 h-12 rounded-full bg-black border-2 border-secondary relative z-10 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] step-circle transition-colors duration-500 order-1 md:order-2 flex-shrink-0">
                                 <span className="font-bold">1</span>
                             </div>
-                            <div className="w-full md:w-5/12 pl-0 md:pl-12 hidden md:block"></div>
+                            <div className="w-full md:w-5/12 pl-0 md:pl-12 hidden md:block order-3"></div>
                         </div>
 
                         {/* Step 2 */}
-                        <div className="flex flex-col md:flex-row items-center justify-between process-step  ">
-                            <div className="w-full md:w-5/12 pr-0 md:pr-12 hidden md:block"></div>
-                            <div className="w-12 h-12 rounded-full bg-black border-2 border-black/20 dark:border-white/20 relative z-10 flex items-center justify-center step-circle transition-colors duration-500">
+                        <div className="flex flex-col md:flex-row items-center justify-between process-step">
+                            <div className="w-full md:w-5/12 pr-0 md:pr-12 hidden md:block order-3 md:order-1"></div>
+                            <div className="w-12 h-12 rounded-full bg-black border-2 border-black/20 dark:border-white/20 relative z-10 flex items-center justify-center step-circle transition-colors duration-500 order-1 md:order-2 flex-shrink-0">
                                 <span className="font-bold">2</span>
                             </div>
-                            <div className="w-full md:w-5/12 text-center md:text-left mt-6 md:mt-0 pl-0 md:pl-12">
+                            <div className="w-full md:w-5/12 text-center md:text-left order-2 md:order-3 mt-4 md:mt-0 pl-0 md:pl-12">
                                 <h4 className="text-2xl font-bold mb-2">Design & Prototyping</h4>
                                 <p className="text-gray-400 font-body text-sm">Crafting premium, handcrafted UIs using modern glassmorphism and pixel-perfect aesthetics.</p>
                             </div>
                         </div>
 
                         {/* Step 3 */}
-                        <div className="flex flex-col md:flex-row items-center justify-between process-step  ">
-                            <div className="w-full md:w-5/12 text-center md:text-right mb-6 md:mb-0 pr-0 md:pr-12">
+                        <div className="flex flex-col md:flex-row items-center justify-between process-step">
+                            <div className="w-full md:w-5/12 text-center md:text-right order-2 md:order-1 mt-4 md:mt-0 pr-0 md:pr-12">
                                 <h4 className="text-2xl font-bold mb-2">Development</h4>
                                 <p className="text-gray-400 font-body text-sm">Writing clean, scalable code for a fast and secure architecture.</p>
                             </div>
-                            <div className="w-12 h-12 rounded-full bg-black border-2 border-black/20 dark:border-white/20 relative z-10 flex items-center justify-center step-circle transition-colors duration-500">
+                            <div className="w-12 h-12 rounded-full bg-black border-2 border-black/20 dark:border-white/20 relative z-10 flex items-center justify-center step-circle transition-colors duration-500 order-1 md:order-2 flex-shrink-0">
                                 <span className="font-bold">3</span>
                             </div>
-                            <div className="w-full md:w-5/12 pl-0 md:pl-12 hidden md:block"></div>
+                            <div className="w-full md:w-5/12 pl-0 md:pl-12 hidden md:block order-3"></div>
                         </div>
                         
                         {/* Step 4 */}
-                        <div className="flex flex-col md:flex-row items-center justify-between process-step  ">
-                            <div className="w-full md:w-5/12 pr-0 md:pr-12 hidden md:block"></div>
-                            <div className="w-12 h-12 rounded-full bg-black border-2 border-black/20 dark:border-white/20 relative z-10 flex items-center justify-center step-circle transition-colors duration-500">
+                        <div className="flex flex-col md:flex-row items-center justify-between process-step">
+                            <div className="w-full md:w-5/12 pr-0 md:pr-12 hidden md:block order-3 md:order-1"></div>
+                            <div className="w-12 h-12 rounded-full bg-black border-2 border-black/20 dark:border-white/20 relative z-10 flex items-center justify-center step-circle transition-colors duration-500 order-1 md:order-2 flex-shrink-0">
                                 <span className="font-bold">4</span>
                             </div>
-                            <div className="w-full md:w-5/12 text-center md:text-left mt-6 md:mt-0 pl-0 md:pl-12">
+                            <div className="w-full md:w-5/12 text-center md:text-left order-2 md:order-3 mt-4 md:mt-0 pl-0 md:pl-12">
                                 <h4 className="text-2xl font-bold mb-2">Launch & Scale</h4>
                                 <p className="text-gray-400 font-body text-sm">Rigorous testing followed by seamless deployment and ongoing support to scale your product.</p>
                             </div>
