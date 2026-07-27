@@ -737,6 +737,113 @@ export const TEAM_MEMBERS: TeamMember[] = [
       linkedin: 'https://www.linkedin.com/in/prakasuv',
       github: 'https://github.com/PrakasuV54'
     }
+  },
+  {
+    id: '5',
+    name: 'Reihana Parveen A.',
+    slug: 'reihana-parveen',
+    designation: 'Manager',
+    executiveRole: 'Manager',
+    professionalTitle: 'B.Tech Graduate • Python Developer • Operations & Team Manager',
+    responsibility: 'Motivated and enthusiastic BTech graduate driving organizational growth, operational efficiency, and team coordination.',
+    image: '/assets/images/team/reihana-parveen.jpg',
+    avatarPlaceholder: 'RP',
+    avatarGradient: 'from-purple-600 via-pink-600 to-rose-600',
+    aboutParagraphs: [
+      'Motivated and enthusiastic B.Tech graduate with strong technical knowledge in Python and problem-solving skills. Passionate about applying my skills in a dynamic work environment and contributing to organizational growth.',
+      'Experienced in designing hardware systems such as sensor-based Obstacles Avoiding Cars, as well as building AI-driven decision-making systems like the AI Business Partner to streamline organizational strategy.'
+    ],
+    careerObjective: 'Motivated and enthusiastic BTech graduate seeking to apply strong Python technical knowledge and problem-solving skills to manage project workflows, support team objectives, and drive organizational growth.',
+    skillCategories: [
+      {
+        category: 'Programming Languages',
+        skills: ['Python Programming']
+      },
+      {
+        category: 'Office & Productivity',
+        skills: ['MS Office']
+      },
+      {
+        category: 'Core Competencies',
+        skills: ['Communication Skills', 'Teamwork', 'Problem Solving']
+      }
+    ],
+    experience: [
+      {
+        role: 'Manager',
+        company: 'Network Navigator Pioneers (NNP)',
+        period: '2024 – Present',
+        description: 'Overseeing organizational workflow execution, client project coordination, operational standards, and cross-functional team alignment.'
+      }
+    ],
+    projects: [
+      {
+        title: 'Obstacles Avoiding Car (Mini Project)',
+        tech: ['Python', 'Sensors', 'Hardware Automation'],
+        description: [
+          'Designed and developed an automated system to detect and avoid obstacles using hardware sensors and intelligent control algorithms.'
+        ],
+        tag: 'Hardware & Automation'
+      },
+      {
+        title: 'AI Business Partner (Main Project)',
+        tech: ['Python', 'Artificial Intelligence', 'Decision Intelligence'],
+        description: [
+          'Built an AI-based system to assist businesses and startups in automated decision-making and strategic planning.'
+        ],
+        tag: 'AI & Decision Support'
+      }
+    ],
+    education: [
+      {
+        degree: 'Bachelor of Technology (B.Tech)',
+        field: 'Engineering & Technology',
+        institution: 'Dhanalakshmi Srinivasan Engineering College, Perambalur',
+        year: '2024',
+        status: 'Graduated'
+      },
+      {
+        degree: 'Higher Secondary (12th)',
+        field: 'Higher Secondary Education',
+        institution: 'Sri Ramakrishna Matric Higher Secondary School',
+        year: '2023',
+        status: 'Completed'
+      },
+      {
+        degree: 'SSLC (10th)',
+        field: 'Secondary School Certificate',
+        institution: 'Sri Ramakrishna Matric Higher Secondary School',
+        year: '2021',
+        status: 'Completed'
+      }
+    ],
+    certificates: [
+      {
+        title: 'Full Stack Development',
+        description: 'Comprehensive professional certification covering end-to-end web application architecture and modern software development.'
+      }
+    ],
+    strengths: [
+      'Python Programming',
+      'Teamwork & Leadership',
+      'Communication Skills',
+      'Problem Solving',
+      'MS Office Suite',
+      'Project Management'
+    ],
+    languages: ['Tamil', 'English'],
+    achievements: [
+      'Appointed as Manager at Network Navigator Pioneers (NNP).',
+      'Developed AI Business Partner decision assistance platform and Obstacles Avoiding Car project.',
+      'Completed Full Stack Development Professional Certification.'
+    ],
+    contact: {
+      email: 'reihanasalam106@gmail.com',
+      phone: '+91 63806 52285',
+      location: 'Perambalur, Tamil Nadu, India',
+      linkedin: '',
+      github: ''
+    }
   }
 ];
 
