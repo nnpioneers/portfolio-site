@@ -167,10 +167,7 @@ export default function Home() {
                 </div>
 
                 <div className="relative">
-                    {/* Connecting Line */}
-                    <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block z-0">
-                        <div className="absolute top-0 left-0 w-full bg-secondary progress-line" style={{ height: "0%", boxShadow: "0 0 10px rgba(59,130,246,0.5)" }}></div>
-                    </div>
+
 
                     <div className="space-y-16 md:space-y-24">
                         {/* Step 1 */}
