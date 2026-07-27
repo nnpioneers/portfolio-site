@@ -32,39 +32,50 @@ export default function Preloader() {
 
         const tl = gsap.timeline();
 
-        // Phase 1: Pure darkness (0.5s)
-        tl.to({}, { duration: 0.5 });
-        
-        // Signal the ThreeBackground (if it exists) to start its sequence
+        // 0.0s: Instant start - signal background/cinematic
         tl.add(() => {
             const event = new CustomEvent('nnp-start-cinematic');
             window.dispatchEvent(event);
-        }, "+=0");
+        }, 0);
 
-        // Phase 2: Logo slowly materializes
-        tl.to(loaderAura, { opacity: 0.6, duration: 4, ease: "power2.inOut" }, "+=2");
-        tl.to(loaderLogo, { opacity: 1, scale: 1, duration: 4, ease: "power2.inOut" }, "<");
+        // 0.2s: Logo fades in and scales smoothly (0.5s duration)
+        tl.to(loaderAura, { opacity: 0.6, duration: 0.5, ease: "power2.out" }, 0.2);
+        tl.to(loaderLogo, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 0.2);
 
-        // Phase 3: Text sequence
+        // 0.5s: "WELCOME TO NNP" text appears (0.4s duration)
         if (welcomeText) {
-            tl.to(welcomeText, { opacity: 1, y: 0, duration: 2, ease: "power2.out" }, "-=2");
+            tl.to(welcomeText, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.5);
+            
             tl.add(() => {
                 const event = new CustomEvent('nnp-fire-pulse');
                 window.dispatchEvent(event);
-            }, "+=1");
-            tl.to(welcomeText, { opacity: 0, y: -10, duration: 1, ease: "power2.in" }, "+=1");
+            }, 0.8);
+
+            // 1.5s: Text fades out smoothly (0.3s duration)
+            tl.to(welcomeText, { opacity: 0, y: -8, duration: 0.3, ease: "power2.in" }, 1.5);
         } else {
             tl.add(() => {
                 const event = new CustomEvent('nnp-fire-pulse');
                 window.dispatchEvent(event);
-            }, "+=2");
+            }, 0.8);
         }
 
-        // Phase 4: Transition to Navbar
+        // 1.8s: Smooth fade-out & logo transition begins
         tl.add(() => {
+            // Fade out background loader container smoothly
+            if (loader) {
+                gsap.to(loader, { 
+                    opacity: 0, 
+                    duration: 0.7, 
+                    ease: "power2.inOut" 
+                });
+            }
+
             if (!navLogo || !loaderLogo) {
                 setIsLoading(false);
                 document.body.style.overflow = '';
+                document.documentElement.classList.add('preloader-complete');
+                window.dispatchEvent(new CustomEvent('nnp-preloader-complete'));
                 return;
             }
             
@@ -75,25 +86,25 @@ export default function Preloader() {
             const yMove = rectTarget.top - rectCurrent.top;
             const scaleChange = rectTarget.width / rectCurrent.width;
 
-            gsap.to(loaderAura, { opacity: 0, duration: 1, ease: "power3.inOut" });
+            gsap.to(loaderAura, { opacity: 0, duration: 0.6, ease: "power3.inOut" });
 
             gsap.to(loaderLogo, {
                 x: xMove,
                 y: yMove,
                 scale: scaleChange,
-                opacity: 0.8,
-                duration: 1.5,
+                opacity: 0.9,
+                duration: 0.7,
                 ease: "power3.inOut",
                 onComplete: () => {
                     setIsLoading(false);
                     gsap.set(navLogo, { opacity: 1 });
-                    if (navText) gsap.to(navText, { opacity: 1, duration: 1 });
+                    if (navText) gsap.to(navText, { opacity: 1, duration: 0.4 });
                     document.body.style.overflow = '';
                     document.documentElement.classList.add('preloader-complete');
                     window.dispatchEvent(new CustomEvent('nnp-preloader-complete'));
                 }
             });
-        });
+        }, 1.8);
 
     }, []);
 

@@ -43,7 +43,7 @@ export default function GSAPAnimationProvider({ children }: { children: React.Re
                         let fired = false;
                         const safetyTimer = setTimeout(() => {
                             if (!fired) { fired = true; triggerHeroAnim(); }
-                        }, 3000);
+                        }, 2500);
 
                         window.addEventListener('nnp-preloader-complete', () => {
                             if (!fired) {
