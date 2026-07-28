@@ -44,7 +44,7 @@ export interface TeamMember {
   achievements: string[];
   contact: {
     email: string;
-    phone: string;
+    phone?: string;
     location: string;
     linkedin: string;
     github: string;
@@ -193,7 +193,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     ],
     contact: {
       email: 'moahmeedmohai2020@gmail.com',
-      phone: '+91 90035 73340',
       location: 'Tamil Nadu, India',
       linkedin: 'https://www.linkedin.com/in/mohamed-naseem-m-872445342?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: 'https://github.com/MohamedNaseem-M'
@@ -327,7 +326,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     ],
     contact: {
       email: 'sabeerjasim1233@gmail.com',
-      phone: '+91 80565 95689',
       location: 'Tamil Nadu, India',
       linkedin: 'https://www.linkedin.com/in/jasim-ahamed-791a80296',
       github: 'https://github.com/jasimstack'
@@ -458,7 +456,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     ],
     contact: {
       email: 'mdrazzth@gmail.com',
-      phone: '+91 63694 84756',
       location: 'Tamil Nadu, India',
       linkedin: 'https://www.linkedin.com/in/md-rasith?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: 'https://github.com/Rasith-27'
@@ -598,7 +595,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     ],
     contact: {
       email: 'mahamoodmajin122@gmail.com',
-      phone: '+91 78268 31126',
       location: 'Tamil Nadu, India',
       linkedin: 'https://www.linkedin.com/in/mahamood-majin-s-b59441342',
       github: 'https://github.com/mahamoodmajin183-ui'
@@ -734,7 +730,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     ],
     contact: {
       email: 'prakasuvelmurugan@gmail.com',
-      phone: '+91 89404 04036',
       location: 'Chennai / Tamil Nadu, India',
       linkedin: 'https://www.linkedin.com/in/prakasuv',
       github: 'https://github.com/PrakasuV54'
@@ -842,7 +837,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     ],
     contact: {
       email: 'reihanasalam106@gmail.com',
-      phone: '+91 63806 52285',
       location: 'Perambalur, Tamil Nadu, India',
       linkedin: 'https://www.linkedin.com/in/reihana-parveen-a-2919ba342?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: ''

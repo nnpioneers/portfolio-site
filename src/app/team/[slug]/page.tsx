@@ -172,13 +172,15 @@ export default async function TeamMemberPortfolioPage({ params }: PageProps) {
                 <span>{member.contact.email}</span>
               </a>
 
-              <a
-                href={`tel:${member.contact.phone}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-secondary/40 text-sm font-medium hover:text-white transition-all"
-              >
-                <Phone className="w-4 h-4 text-secondary" />
-                <span>{member.contact.phone}</span>
-              </a>
+              {member.contact.phone && (
+                <a
+                  href={`tel:${member.contact.phone}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-secondary/40 text-sm font-medium hover:text-white transition-all"
+                >
+                  <Phone className="w-4 h-4 text-secondary" />
+                  <span>{member.contact.phone}</span>
+                </a>
+              )}
 
               <a
                 href={member.contact.linkedin}
