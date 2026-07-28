@@ -9,6 +9,7 @@ export interface TeamMember {
   aboutParagraphs: string[];
   careerObjective: string;
   image?: string;
+  imagePosition?: string;
   avatarPlaceholder: string;
   avatarGradient: string;
   skillCategories: {
@@ -747,6 +748,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     professionalTitle: 'B.Tech Graduate • Python Developer • Operations & Team Manager',
     responsibility: 'Motivated and enthusiastic BTech graduate driving organizational growth, operational efficiency, and team coordination.',
     image: '/assets/images/team/reihana-parveen.jpg',
+    imagePosition: 'object-center',
     avatarPlaceholder: 'RP',
     avatarGradient: 'from-purple-600 via-pink-600 to-rose-600',
     aboutParagraphs: [
