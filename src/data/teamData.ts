@@ -612,6 +612,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     executiveRole: 'Chief Financial Officer',
     professionalTitle: 'Software Developer • Full Stack Web Developer',
     responsibility: 'Manages finance, budgeting, investments, and business planning.',
+    image: '/assets/images/team/prakash.jpg',
     avatarPlaceholder: 'VP',
     avatarGradient: 'from-violet-600 via-purple-600 to-pink-600',
     aboutParagraphs: [
@@ -740,7 +741,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     }
   },
   {
-    id: '5',
+    id: '6',
     name: 'A. Reihana Parveen',
     slug: 'reihana-parveen',
     designation: 'Manager',
