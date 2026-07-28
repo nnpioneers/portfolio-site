@@ -111,7 +111,7 @@ export default function TeamSection() {
   const management = TEAM_MEMBERS.slice(3);
 
   return (
-    <div className="mb-32">
+    <div id="team" className="mb-32 scroll-mt-28">
       {/* Section Header */}
       <div className="text-center mb-16 reveal-text">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-sm mb-4 font-semibold uppercase tracking-widest">
