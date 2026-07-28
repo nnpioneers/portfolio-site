@@ -13,9 +13,30 @@ export default function TeamSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
       <div className="relative z-10 mb-6">
-        {/* Designation Badge */}
-        <div className="inline-block px-3.5 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-wider mb-4">
-          {member.designation}
+        {/* Profile Image & Badge Row */}
+        <div className="flex items-start justify-between gap-4 mb-6">
+          {member.image ? (
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden border-2 border-secondary/30 shadow-[0_4px_20px_rgba(0,0,0,0.4)] relative shrink-0 group-hover:border-secondary/60 group-hover:scale-105 transition-all duration-300 bg-black/50">
+              <img
+                src={member.image}
+                alt={member.name}
+                className={`w-full h-full object-cover ${member.imagePosition || 'object-top'} transition-transform duration-500 group-hover:scale-110`}
+              />
+            </div>
+          ) : (
+            <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br ${member.avatarGradient} p-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.4)] relative shrink-0`}>
+              <div className="w-full h-full rounded-[14px] bg-black/80 flex flex-col items-center justify-center text-center">
+                <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-gray-400">
+                  {member.avatarPlaceholder}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Designation Badge */}
+          <div className="inline-block px-3.5 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-wider">
+            {member.designation}
+          </div>
         </div>
 
         {/* Full Name */}
