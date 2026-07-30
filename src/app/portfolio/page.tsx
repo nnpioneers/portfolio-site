@@ -210,16 +210,16 @@ export default function PortfolioPage() {
 
         {/* Project 5: EduCore School Management System */}
         <div className="glass-card rounded-3xl overflow-hidden group service-card">
-          <div className="h-64 bg-slate-900 relative overflow-hidden flex items-center justify-center">
+          <div className="h-64 bg-slate-950 relative overflow-hidden flex items-center justify-center p-2">
             <Image
               src="/images/educore-card.png"
               alt="EduCore Smart School Management System"
               fill
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              className="object-contain object-center group-hover:scale-105 transition-transform duration-500 rounded-xl"
               unoptimized
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-              <span className="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold tracking-widest uppercase">
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span className="px-4 py-1.5 rounded-full bg-blue-600/80 backdrop-blur-md text-white text-xs font-bold tracking-widest uppercase">
                 View Case Study
               </span>
             </div>
