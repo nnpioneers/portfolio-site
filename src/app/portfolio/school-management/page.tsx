@@ -240,7 +240,7 @@ export default function SchoolManagementPage() {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
               Transforming Education with <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300">
-                Smart School Management
+                Smart Education Management
               </span>
             </h1>
 

@@ -226,13 +226,13 @@ export default function PortfolioPage() {
           </div>
           <div className="p-8">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-xs font-bold tracking-widest text-blue-400 uppercase">SCHOOL MANAGEMENT</span>
+              <span className="text-xs font-bold tracking-widest text-blue-400 uppercase">EDUCATION MANAGEMENT</span>
               <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
               <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">NEXT.JS + AI ERP</span>
             </div>
-            <h3 className="text-2xl font-bold mb-3 text-white">EduCore School Management</h3>
+            <h3 className="text-2xl font-bold mb-3 text-white">Smart Education Management System</h3>
             <p className="text-gray-400 font-body text-sm mb-6 line-clamp-2">
-              A world-class, Apple-inspired digital platform for modern schools, providing seamless management for students, teachers, parents, and administrators with AI-powered analytics.
+              A world-class, Apple-inspired digital platform for modern educational institutions, providing seamless management for students, teachers, parents, and administrators with AI-powered analytics.
             </p>
             <Link href="/portfolio/school-management" className="text-blue-400 font-medium flex items-center gap-2 text-sm group-hover:underline">
               View Case Study <ArrowRight className="w-4 h-4" />
