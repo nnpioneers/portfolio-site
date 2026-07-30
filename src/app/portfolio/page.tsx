@@ -215,7 +215,7 @@ export default function PortfolioPage() {
               src="/images/educore-card.png"
               alt="Smart Education Management System"
               fill
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
               unoptimized
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
