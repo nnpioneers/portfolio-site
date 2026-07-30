@@ -208,10 +208,16 @@ export default function PortfolioPage() {
           </div>
         </div>
 
-        {/* Project 5: EduCore Platform */}
+        {/* Project 5: EduCore School Management System */}
         <div className="glass-card rounded-3xl overflow-hidden group service-card">
           <div className="h-64 bg-slate-900 relative overflow-hidden flex items-center justify-center">
-            <GraduationCap className="w-12 h-12 text-accent" />
+            <Image
+              src="/images/educore-card.png"
+              alt="EduCore Smart School Management System"
+              fill
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              unoptimized
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
               <span className="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold tracking-widest uppercase">
                 View Case Study
@@ -220,16 +226,16 @@ export default function PortfolioPage() {
           </div>
           <div className="p-8">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-xs font-bold tracking-widest text-accent uppercase">School ERP</span>
+              <span className="text-xs font-bold tracking-widest text-blue-400 uppercase">SCHOOL MANAGEMENT</span>
               <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
-              <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">Next.js + Prisma</span>
+              <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">NEXT.JS + AI ERP</span>
             </div>
-            <h3 className="text-2xl font-bold mb-3 text-white">EduCore Platform</h3>
+            <h3 className="text-2xl font-bold mb-3 text-white">EduCore School Management</h3>
             <p className="text-gray-400 font-body text-sm mb-6 line-clamp-2">
-              A scalable school management system bridging the communication gap between teachers, students, and parents with interactive dashboards.
+              A world-class, Apple-inspired digital platform for modern schools, providing seamless management for students, teachers, parents, and administrators with AI-powered analytics.
             </p>
-            <Link href="/registration?service=School Management System" className="text-accent font-medium flex items-center gap-2 text-sm group-hover:underline">
-              Read More <ArrowRight className="w-4 h-4" />
+            <Link href="/portfolio/school-management" className="text-blue-400 font-medium flex items-center gap-2 text-sm group-hover:underline">
+              View Case Study <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
