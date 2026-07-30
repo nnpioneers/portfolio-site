@@ -149,37 +149,6 @@ const WHY_CHOOSE_US = [
   { title: '24×7 Premium Support', desc: 'Dedicated technical account manager, staff training, and 24/7 helpdesk support.' },
 ];
 
-const TESTIMONIALS = [
-  {
-    role: 'Principal',
-    name: 'Dr. Aris Thorne',
-    institution: 'Oakridge International Academy',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
-    quote: 'Implementing this School Management System transformed our institution. Administrative workload dropped by 60%, and parent engagement reached an all-time high.'
-  },
-  {
-    role: 'Senior Teacher',
-    name: 'Prof. Sarah Jenkins',
-    institution: 'St. Xavier Global School',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200',
-    quote: 'The AI lesson planner and automated grading saved me over 10 hours every week. I can now focus entirely on engaging with my students.'
-  },
-  {
-    role: 'Parent',
-    name: 'Mark Anthony',
-    institution: 'Parent of Grade 9 Student',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
-    quote: 'The live bus tracking and instant fee payment features give immense peace of mind. Getting real-time academic updates on my phone is incredible.'
-  },
-  {
-    role: 'Student Council Leader',
-    name: 'Emily Watson',
-    institution: 'Grade 12 Head Prefect',
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200',
-    quote: 'Having our timetable, assignments, exam results, and library books accessible in one clean app makes studying so organized and stress-free.'
-  }
-];
-
 export default function SchoolManagementPage() {
   const [activePortal, setActivePortal] = useState<'admin' | 'teacher' | 'parent' | 'student'>('admin');
   const [activeAppTab, setActiveAppTab] = useState<'student' | 'teacher' | 'parent' | 'admin'>('student');
@@ -1166,51 +1135,6 @@ export default function SchoolManagementPage() {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 💬 TESTIMONIALS */}
-      <section className="py-20 border-b border-blue-900/30 bg-slate-950/40">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-400">Institutional Feedback</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mt-2 mb-4">
-              Trusted by Leading Educators
-            </h2>
-            <p className="text-slate-400 text-sm md:text-base">
-              Hear what school leaders, teachers, parents, and students say about our platform.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {TESTIMONIALS.map((t, idx) => (
-              <div 
-                key={idx}
-                className="p-8 rounded-3xl bg-slate-900/90 border border-blue-900/40 hover:border-blue-500/50 transition-all flex flex-col justify-between relative group"
-              >
-                <div className="flex items-center gap-1 text-amber-400 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
-                  ))}
-                </div>
-
-                <p className="text-slate-300 text-sm italic leading-relaxed mb-6">
-                  "{t.quote}"
-                </p>
-
-                <div className="flex items-center gap-4 border-t border-slate-800 pt-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden relative border border-blue-400/40 shrink-0">
-                    <Image src={t.image} alt={t.name} fill className="object-cover" unoptimized />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">{t.name}</h4>
-                    <span className="text-xs text-blue-400 font-semibold">{t.role}</span>
-                    <p className="text-[11px] text-slate-400">{t.institution}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
