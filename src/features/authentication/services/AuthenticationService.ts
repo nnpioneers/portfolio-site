@@ -20,66 +20,86 @@ export class AuthenticationService {
   }
 
   public async login(credentials: any): Promise<AuthResponse> {
-    // Mock Delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 800));
 
-    if (credentials.email === 'admin@nnp.com' && credentials.password === 'admin') {
-      return this.generateMockResponse('ADMIN');
-    }
-    
-    if (credentials.email === 'user@nnp.com' && credentials.password === 'user') {
-      return this.generateMockResponse('BUSINESS_OWNER');
+    if (!credentials.email || !credentials.password) {
+      throw {
+        type: AuthErrorType.INVALID_LOGIN,
+        message: 'Please provide both email and password'
+      } as AuthError;
     }
 
-    throw {
-      type: AuthErrorType.INVALID_LOGIN,
-      message: 'Invalid email or password'
-    } as AuthError;
+    // Default admin / user credentials or dynamic email login
+    const isOwner = credentials.email.toLowerCase().includes('admin') || credentials.email === 'admin@nnp.com';
+    const name = credentials.email.split('@')[0].replace('.', ' ');
+    const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+
+    return this.generateMockResponse(isOwner ? 'ADMIN' : 'CLIENT', credentials.email, formattedName);
   }
 
   public async logout(): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    // Clear cookies, tokens, etc.
+    await new Promise(resolve => setTimeout(resolve, 400));
   }
 
   public async register(data: any): Promise<AuthResponse> {
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    return this.generateMockResponse('CLIENT');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    const email = data.email || 'newuser@nnp.com';
+    const name = email.split('@')[0];
+    return this.generateMockResponse('CLIENT', email, name);
+  }
+
+  public async sendOtp(phone: string): Promise<boolean> {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return true;
+  }
+
+  public async verifyOtp(phone: string, code: string): Promise<AuthResponse> {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    if (code !== '123456' && code.length !== 6) {
+      throw {
+        type: AuthErrorType.INVALID_LOGIN,
+        message: 'Invalid 6-digit OTP code'
+      } as AuthError;
+    }
+    return this.generateMockResponse('CLIENT', `user_${phone.slice(-4)}@nnp.com`, `Mobile User (${phone})`);
   }
 
   public async refresh(refreshToken: string): Promise<AuthResponse> {
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 400));
     return this.generateMockResponse('CLIENT');
   }
 
   public async verify(token: string): Promise<boolean> {
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 300));
     return !!token;
   }
 
   public async forgotPassword(email: string): Promise<boolean> {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 800));
     return true;
   }
 
   public async resetPassword(token: string, newPassword: string): Promise<boolean> {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 800));
     return true;
   }
 
   public async loginWithGoogle(): Promise<AuthResponse> {
-    return this.generateMockResponse('CLIENT');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return this.generateMockResponse('CLIENT', 'google.user@nnp.com', 'Google User');
   }
 
   public async loginWithGitHub(): Promise<AuthResponse> {
-    return this.generateMockResponse('CLIENT');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return this.generateMockResponse('CLIENT', 'github.user@nnp.com', 'GitHub Developer');
   }
 
-  private generateMockResponse(role: string): AuthResponse {
+  private generateMockResponse(role: string, email = 'user@nnp.com', name = 'Demo User'): AuthResponse {
     const mockUser: User = {
       id: 'usr_' + Math.random().toString(36).substr(2, 9),
-      name: role === 'ADMIN' ? 'NNP Admin' : 'Demo User',
-      email: role === 'ADMIN' ? 'admin@nnp.com' : 'user@nnp.com',
+      name: role === 'ADMIN' ? 'NNP Admin' : name,
+      email: email,
       role: role as any,
       status: 'ACTIVE',
       createdDate: new Date().toISOString(),
