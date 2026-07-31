@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { 
   Hexagon, Mail, Lock, Eye, EyeOff, Smartphone, ArrowRight, Loader2, 
-  ArrowLeft, CheckCircle2, AlertCircle, Phone, RefreshCw, KeyRound, ShieldCheck
+  ArrowLeft, CheckCircle2, AlertCircle, Phone, RefreshCw, KeyRound, ShieldCheck, User as UserIcon
 } from 'lucide-react';
 import { useAuth } from '@/features/authentication/context/AuthContext';
 import { authService } from '@/features/authentication/services/AuthenticationService';
@@ -17,6 +17,7 @@ export default function LoginPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
   // Credentials
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -123,7 +124,7 @@ export default function LoginPage() {
     setErrorMsg('');
     setSuccessMsg('');
 
-    if (!email || !password || !confirmPassword) {
+    if (!fullName || !email || !password || !confirmPassword) {
       setErrorMsg('Please complete all registration fields');
       return;
     }
@@ -138,7 +139,7 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      const response = await authService.register({ email, password });
+      const response = await authService.register({ name: fullName, email, password });
       login(response.user, response.token);
       setSuccessMsg('Account created successfully! Logging into NNP Dashboard...');
       setTimeout(() => router.push('/dashboard'), 800);
@@ -434,6 +435,24 @@ export default function LoginPage() {
               <div>
                 <span className="text-xs font-bold text-secondary uppercase tracking-widest block mb-1">New User</span>
                 <h3 className="text-xl font-bold text-white mb-4">Create your NNP Account</h3>
+              </div>
+
+              {/* Full Name */}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <UserIcon className="w-5 h-5 text-slate-400" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="John Doe"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="w-full bg-surfaceLight border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm text-white focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all"
+                    required
+                  />
+                </div>
               </div>
 
               {/* Email */}
