@@ -46,6 +46,11 @@ export default function BPEmptyState({ onAction: _ }: BPEmptyStateProps) {
         NNP Business Partner
       </h2>
 
+      {/* Under Construction Notice Badge */}
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-semibold tracking-wide uppercase mb-3">
+        <span>⚠️ Note: Under Active Development • Not Fully Built Yet</span>
+      </div>
+
       {/* Subtitle */}
       <p
         style={{

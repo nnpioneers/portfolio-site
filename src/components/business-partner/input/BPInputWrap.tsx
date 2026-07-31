@@ -62,6 +62,13 @@ export default function BPInputWrap({ onSend }: BPInputWrapProps) {
           onSend={handleSend}
         />
       </div>
+
+      <div className="flex items-center justify-center gap-1.5 mt-2.5 text-center">
+        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+        <p className="text-[11px] sm:text-xs text-amber-300/80 font-medium tracking-wide">
+          ⚠️ Note: AI Business Partner is currently under active development and is not fully built yet.
+        </p>
+      </div>
     </div>
   );
 }

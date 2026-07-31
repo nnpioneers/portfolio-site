@@ -15,10 +15,10 @@ export default function BPWelcomeScreen({ isOpen, onContinue, onNew }: BPWelcome
       <div className="bp-welcome-card">
         <BPOrb size={80} className="mx-auto mb-6" />
         
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/20 text-violet-300 text-xs font-semibold uppercase tracking-widest mb-4"
-             style={{ background: 'rgba(139,92,246,0.1)' }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse"></span>
-          AI Partner Ready
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 text-amber-300 text-xs font-semibold uppercase tracking-widest mb-4"
+             style={{ background: 'rgba(245,158,11,0.15)' }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          Under Construction • Not Fully Built Yet
         </div>
         
         <h2 className="text-3xl font-bold mb-2 tracking-tight">Welcome Back! 👋</h2>
