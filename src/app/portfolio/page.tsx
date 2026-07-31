@@ -92,6 +92,43 @@ export default function PortfolioPage() {
           </div>
         </div>
 
+        {/* Project 2: Job Prediction Using CGPA & Skills (ML AI recruitment) */}
+        <div className="glass-card rounded-3xl overflow-hidden group service-card border border-blue-500/30 hover:border-blue-500/60 transition-all duration-300 shadow-[0_0_25px_rgba(59,130,246,0.15)]">
+          <div className="h-64 bg-slate-900 relative overflow-hidden flex items-center justify-center">
+            <Image
+              src="/images/job-prediction-card.png"
+              alt="Job Prediction Using CGPA & Skills"
+              fill
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+              unoptimized
+            />
+            <div className="absolute top-3 left-3 z-10">
+              <span className="px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/40 text-blue-300 text-[10px] font-bold tracking-wider uppercase flex items-center gap-1 shadow-lg">
+                <BrainCircuit className="w-3 h-3 text-blue-400" /> Machine Learning Case Study
+              </span>
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span className="px-4 py-1.5 rounded-full bg-blue-600/80 backdrop-blur-md text-white text-xs font-bold tracking-widest uppercase">
+                View Case Study
+              </span>
+            </div>
+          </div>
+          <div className="p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-xs font-bold tracking-widest text-blue-400 uppercase">MACHINE LEARNING</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
+              <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">AI RECRUITMENT</span>
+            </div>
+            <h3 className="text-2xl font-bold mb-3 text-white">Job Prediction Using CGPA & Skills</h3>
+            <p className="text-gray-400 font-body text-sm mb-6 line-clamp-2">
+              An AI-powered recruitment intelligence platform that analyzes student resumes, CGPA, technical skills, certifications, and company requirements to predict suitable job opportunities.
+            </p>
+            <Link href="/portfolio/job-prediction" className="text-blue-400 font-medium flex items-center gap-2 text-sm group-hover:underline">
+              View Case Study <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
         {/* Project 1: HotelPro Management System */}
         <div className="glass-card rounded-3xl overflow-hidden group service-card">
           <div className="h-64 bg-slate-900 relative overflow-hidden flex items-center justify-center">
