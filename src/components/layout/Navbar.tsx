@@ -97,8 +97,12 @@ export default function Navbar() {
                   onClick={() => setProfileOpen(!profileOpen)}
                   className="flex items-center gap-2 bg-white/10 border border-white/20 rounded-full pl-2 pr-4 py-1.5 hover:bg-white/20 transition-all"
                 >
-                  <div className="w-7 h-7 rounded-full bg-secondary/20 border border-secondary flex items-center justify-center text-xs font-bold text-secondary">
-                    {user?.name?.charAt(0) || 'U'}
+                  <div className="w-7 h-7 rounded-full bg-secondary/20 border border-secondary flex items-center justify-center text-xs font-bold text-secondary overflow-hidden shrink-0">
+                    {user?.avatar ? (
+                      <img src={user.avatar} alt={user.name || 'User Avatar'} className="w-full h-full object-cover rounded-full" />
+                    ) : (
+                      user?.name?.charAt(0) || 'U'
+                    )}
                   </div>
                   <span className="text-sm font-medium">{user?.name}</span>
                 </button>
@@ -269,8 +273,12 @@ export default function Navbar() {
           {isAuthenticated ? (
             <div className="space-y-2">
               <div className="flex items-center gap-3 px-4 py-2 bg-white/5 rounded-xl">
-                <div className="w-8 h-8 rounded-full bg-secondary/20 border border-secondary flex items-center justify-center text-xs font-bold text-secondary shrink-0">
-                  {user?.name?.charAt(0) || 'U'}
+                <div className="w-8 h-8 rounded-full bg-secondary/20 border border-secondary flex items-center justify-center text-xs font-bold text-secondary shrink-0 overflow-hidden">
+                  {user?.avatar ? (
+                    <img src={user.avatar} alt={user.name || 'User Avatar'} className="w-full h-full object-cover rounded-full" />
+                  ) : (
+                    user?.name?.charAt(0) || 'U'
+                  )}
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-white truncate">{user?.name}</p>
