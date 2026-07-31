@@ -29,16 +29,54 @@ function LaptopIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-const DASHBOARD_METRICS = [
-  { label: 'Total Students', value: '1,250+', change: '+12% YoY', icon: GraduationCap, color: 'from-blue-500 to-indigo-600' },
-  { label: 'Teachers & Staff', value: '85+', change: '100% Active', icon: Users, color: 'from-indigo-500 to-purple-600' },
-  { label: 'Total Parents', value: '1,180+', change: '96% App Engagement', icon: UserCheck, color: 'from-sky-500 to-blue-600' },
-  { label: 'Active Classes', value: '40+', change: '120 Sections', icon: BookOpen, color: 'from-cyan-500 to-teal-600' },
-  { label: "Today's Attendance", value: '98.4%', change: 'RFID Verified', icon: Activity, color: 'from-emerald-500 to-teal-600' },
-  { label: 'Upcoming Exams', value: '14 Exams', change: 'Mid-Term Schedule', icon: FileText, color: 'from-amber-500 to-orange-600' },
-  { label: 'Fee Collection', value: '$142.5K', change: '94% On-time', icon: CreditCard, color: 'from-purple-500 to-pink-600' },
-  { label: 'Academic Index', value: '88.5%', change: 'Grade A Avg', icon: Award, color: 'from-blue-600 to-cyan-500' },
-];
+const ROLE_DASHBOARD_METRICS: Record<'admin' | 'teacher' | 'parent' | 'student', Array<{
+  label: string;
+  value: string;
+  change: string;
+  icon: React.ElementType;
+  color: string;
+}>> = {
+  admin: [
+    { label: 'Total Students', value: '1,250+', change: '+12% YoY', icon: GraduationCap, color: 'from-blue-500 to-indigo-600' },
+    { label: 'Teachers & Staff', value: '85+', change: '100% Active', icon: Users, color: 'from-indigo-500 to-purple-600' },
+    { label: 'Total Parents', value: '1,180+', change: '96% App Engagement', icon: UserCheck, color: 'from-sky-500 to-blue-600' },
+    { label: 'Active Classes', value: '40+', change: '120 Sections', icon: BookOpen, color: 'from-cyan-500 to-teal-600' },
+    { label: "Today's Attendance", value: '98.4%', change: 'RFID Verified', icon: Activity, color: 'from-emerald-500 to-teal-600' },
+    { label: 'Upcoming Exams', value: '14 Exams', change: 'Mid-Term Schedule', icon: FileText, color: 'from-amber-500 to-orange-600' },
+    { label: 'Fee Collection', value: '$142.5K', change: '94% On-time', icon: CreditCard, color: 'from-purple-500 to-pink-600' },
+    { label: 'Academic Performance', value: '88.5%', change: 'Grade A Avg', icon: Award, color: 'from-blue-600 to-cyan-500' },
+  ],
+  teacher: [
+    { label: "Today's Classes", value: '5 Periods', change: 'Grade 10 & 11 Math', icon: Calendar, color: 'from-blue-500 to-indigo-600' },
+    { label: 'Assigned Subjects', value: '4 Subjects', change: 'Algebra & Physics', icon: BookOpen, color: 'from-indigo-500 to-purple-600' },
+    { label: 'Pending Assignments', value: '12 Papers', change: 'To Grade by Friday', icon: FileText, color: 'from-amber-500 to-orange-600' },
+    { label: 'Student Attendance', value: '99.1%', change: 'Class 10-A Present', icon: UserCheck, color: 'from-emerald-500 to-teal-600' },
+    { label: 'Upcoming Exams', value: '3 Tests', change: 'Calculus Quiz Tomorrow', icon: Award, color: 'from-purple-500 to-pink-600' },
+    { label: 'Lesson Plans', value: '8/10 Ready', change: 'Week 12 Sync', icon: Sparkles, color: 'from-sky-500 to-blue-600' },
+    { label: 'Leave Requests', value: '0 Pending', change: 'Approved by Admin', icon: Clock, color: 'from-cyan-500 to-teal-600' },
+    { label: 'Class Performance', value: '91.2%', change: '+4.5% Avg Increase', icon: BarChart3, color: 'from-blue-600 to-cyan-500' },
+  ],
+  parent: [
+    { label: 'Child Attendance', value: '98.8%', change: 'On Time (08:14 AM)', icon: UserCheck, color: 'from-emerald-500 to-teal-600' },
+    { label: 'Homework Status', value: '4/4 Done', change: 'All Submitted Today', icon: FileText, color: 'from-blue-500 to-indigo-600' },
+    { label: 'Upcoming Exams', value: 'Science Mid-Term', change: 'Starts Oct 15', icon: Calendar, color: 'from-amber-500 to-orange-600' },
+    { label: 'Fee Due', value: '$0.00', change: 'Term 2 Fully Paid', icon: CreditCard, color: 'from-indigo-500 to-purple-600' },
+    { label: 'School Notifications', value: '3 New', change: 'Sports Day Circular', icon: Bell, color: 'from-purple-500 to-pink-600' },
+    { label: 'Parent Meetings', value: 'Oct 18', change: '4:00 PM Confirmed', icon: Users, color: 'from-sky-500 to-blue-600' },
+    { label: 'Academic Progress', value: 'Grade A+', change: 'Top 5% in Math', icon: Award, color: 'from-cyan-500 to-teal-600' },
+    { label: 'Transport Status', value: 'Bus #14', change: 'ETA 15 mins to Home', icon: Bus, color: 'from-blue-600 to-cyan-500' },
+  ],
+  student: [
+    { label: "Today's Timetable", value: '6 Lectures', change: 'Next: Physics 2 PM', icon: Clock, color: 'from-blue-500 to-indigo-600' },
+    { label: 'Attendance', value: '97.5%', change: '42/43 Days Attended', icon: UserCheck, color: 'from-emerald-500 to-teal-600' },
+    { label: 'Assignments', value: '2 Due Today', change: 'Math & History', icon: FileText, color: 'from-amber-500 to-orange-600' },
+    { label: 'Upcoming Exams', value: 'Chemistry Quiz', change: 'In 2 Days', icon: Calendar, color: 'from-purple-500 to-pink-600' },
+    { label: 'Marks', value: '94/100', change: 'Comp Sci Test', icon: Award, color: 'from-indigo-500 to-purple-600' },
+    { label: 'Class Rank', value: '#3 in Class', change: 'Rank 3 of 38', icon: Star, color: 'from-sky-500 to-blue-600' },
+    { label: 'Library Books', value: '2 Borrowed', change: 'Due in 5 Days', icon: BookOpen, color: 'from-cyan-500 to-teal-600' },
+    { label: 'School Events', value: 'Hackathon', change: 'Reg Open Now', icon: Sparkles, color: 'from-blue-600 to-cyan-500' },
+  ],
+};
 
 const STUDENT_MODULES = [
   { title: 'Student Admission', desc: 'Digital registration, online application tracking, and automated roll number generation.', icon: GraduationCap },
@@ -310,7 +348,29 @@ export default function SchoolManagementPage() {
       </section>
 
       {/* 📊 LIVE DASHBOARD PREVIEW */}
-      <section id="live-dashboard" className="py-20 border-b border-blue-900/30 bg-slate-950/40">
+      <section id="live-dashboard" className="py-20 border-b border-blue-900/30 bg-slate-950/40 relative">
+        <style>{`
+          @keyframes tabCardFadeIn {
+            0% {
+              opacity: 0;
+              transform: translateY(10px) scale(0.98);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+            }
+          }
+          @keyframes tabContentFadeIn {
+            0% {
+              opacity: 0;
+              transform: translateY(8px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}</style>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-blue-400">Interactive Preview</span>
@@ -322,14 +382,14 @@ export default function SchoolManagementPage() {
             </p>
 
             {/* Role Switcher Tabs */}
-            <div className="inline-flex p-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 mt-6 gap-1">
+            <div className="inline-flex p-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 mt-6 gap-1 relative">
               {(['admin', 'teacher', 'parent', 'student'] as const).map((portal) => (
                 <button
                   key={portal}
                   onClick={() => setActivePortal(portal)}
-                  className={`px-6 py-2 rounded-full text-xs font-bold capitalize transition-all ${
+                  className={`px-6 py-2 rounded-full text-xs font-bold capitalize transition-all duration-300 relative z-10 ${
                     activePortal === portal
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-105'
                       : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                   }`}
                 >
@@ -340,13 +400,19 @@ export default function SchoolManagementPage() {
           </div>
 
           {/* Top Live Dashboard Metrics Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mb-8">
-            {DASHBOARD_METRICS.map((metric, idx) => {
+          <div 
+            key={activePortal} 
+            className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 mb-8"
+          >
+            {ROLE_DASHBOARD_METRICS[activePortal].map((metric, idx) => {
               const MIcon = metric.icon;
               return (
                 <div 
                   key={idx}
                   className="p-5 rounded-2xl bg-slate-900/80 border border-blue-900/40 hover:border-blue-500/50 transition-all group"
+                  style={{
+                    animation: `tabCardFadeIn 350ms cubic-bezier(0.16, 1, 0.3, 1) ${idx * 35}ms backwards`,
+                  }}
                 >
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs text-slate-400 font-medium">{metric.label}</span>
@@ -387,7 +453,7 @@ export default function SchoolManagementPage() {
               </div>
             </div>
 
-            <div className="p-6 md:p-8 bg-[#0b1222]">
+            <div key={activePortal} className="p-6 md:p-8 bg-[#0b1222]" style={{ animation: 'tabContentFadeIn 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards' }}>
               {/* Dynamic Content based on Active Portal */}
               {activePortal === 'admin' && (
                 <div className="space-y-6">
