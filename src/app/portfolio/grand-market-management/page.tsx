@@ -165,21 +165,21 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Inventory Management',
     category: 'Inventory',
     description: 'Real-time stock monitoring with low-stock alerts and supplier information.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-inventory-management.png'
   },
   {
     id: 11,
     title: 'Order Management',
     category: 'Orders',
     description: 'Pending, Processing, Packed, Delivered, Cancelled, and Refund management.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-order-management.png'
   },
   {
     id: 12,
     title: 'Sales Analytics',
     category: 'Admin Dashboard',
     description: 'Revenue charts, best-selling products, customer insights, and monthly reports.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-sales-analysis.png'
   }
 ];
 
