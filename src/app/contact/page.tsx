@@ -23,31 +23,31 @@ export default function ContactPage() {
                     <div className="space-y-4">
                         <div className="glass-card p-6 rounded-2xl flex items-center gap-6 group hover:border-secondary/30 transition-colors">
                             <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                <Mail className="w-6 h-6 inline-block" />
+                                <Mail className="w-6 h-6 inline-block text-secondary" />
                             </div>
                             <div>
                                 <h4 className="font-bold text-sm text-gray-400 uppercase tracking-widest mb-1">Email Us</h4>
-                                <a href="mailto:hello@[COMPANY_NAME].com" className="text-lg font-medium hover:text-secondary transition-colors">hello@[COMPANY_NAME].com</a>
+                                <a href="mailto:nnp.connect@gmail.com" className="text-lg font-medium hover:text-secondary transition-colors">nnp.connect@gmail.com</a>
                             </div>
                         </div>
 
                         <div className="glass-card p-6 rounded-2xl flex items-center gap-6 group hover:border-green-500/30 transition-colors">
                             <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                <MessageCircle className="w-6 h-6 inline-block" />
+                                <MessageCircle className="w-6 h-6 inline-block text-green-400" />
                             </div>
                             <div>
-                                <h4 className="font-bold text-sm text-gray-400 uppercase tracking-widest mb-1">WhatsApp</h4>
-                                <a href="#" className="text-lg font-medium hover:text-green-500 transition-colors">+1 (555) 123-4567</a>
+                                <h4 className="font-bold text-sm text-gray-400 uppercase tracking-widest mb-1">WhatsApp & Call</h4>
+                                <a href="https://wa.me/919003573340" target="_blank" rel="noopener noreferrer" className="text-lg font-medium hover:text-green-500 transition-colors">+91 90035 73340</a>
                             </div>
                         </div>
 
                         <div className="glass-card p-6 rounded-2xl flex items-center gap-6 group hover:border-purple-500/30 transition-colors">
                             <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                                <MapPin className="w-6 h-6 inline-block" />
+                                <MapPin className="w-6 h-6 inline-block text-purple-400" />
                             </div>
                             <div>
                                 <h4 className="font-bold text-sm text-gray-400 uppercase tracking-widest mb-1">Headquarters</h4>
-                                <p className="text-lg font-medium">123 Innovation Drive, Silicon Valley, CA 94025</p>
+                                <p className="text-lg font-medium text-white">Labbaikudikadu, Perambalur, Tamil Nadu, India</p>
                             </div>
                         </div>
                     </div>
