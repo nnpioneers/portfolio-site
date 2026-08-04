@@ -6,6 +6,7 @@ export interface TeamMember {
   executiveRole: string;
   professionalTitle: string;
   responsibility: string;
+  department?: string;
   aboutParagraphs: string[];
   careerObjective: string;
   image?: string;
@@ -333,66 +334,67 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: '3',
-    name: 'M. Mohamed Rasith',
+    name: 'Mohamed Rasith M',
     slug: 'mohamed-rasith',
     designation: 'Founder & COO',
     executiveRole: 'Chief Operating Officer',
-    professionalTitle: 'Full Stack Developer (MERN)',
-    responsibility: 'Oversees company operations, project execution, and team coordination.',
+    professionalTitle: 'Web Developer • Software Tester • Data Analyst',
+    responsibility: 'Oversees software development, quality assurance, company operations, and team coordination.',
+    department: 'Software Development & Quality Assurance',
     image: '/assets/images/team/mohamed-rasith.jpg',
     avatarPlaceholder: 'MR',
     avatarGradient: 'from-emerald-500 via-teal-600 to-cyan-700',
     aboutParagraphs: [
-      'Passionate Full Stack Developer pursuing a Bachelor of Technology in Artificial Intelligence and Data Science. Experienced in building responsive and scalable web applications using the MERN Stack, database management, and business analytics.',
-      'Possesses internship experience in Deep Learning, Full Stack Development, and Business Analytics with a strong focus on problem-solving, debugging, collaboration, and delivering practical software solutions.'
+      'Mohamed Rasith is a passionate Web Developer, Software Tester, and aspiring Data Analyst currently pursuing a B.Tech in Artificial Intelligence & Data Science. He has practical experience in Full Stack Development, Software Testing, Database Management, Business Analytics, and Data Analysis. He enjoys building modern web applications, solving technical problems, improving software quality, and creating scalable digital solutions.',
+      'Mohamed Rasith works across multiple domains including Full Stack Development, Software Testing, Database Management, and Data Analytics. His experience includes developing responsive web applications using modern web technologies, debugging software, performing application testing, integrating databases, and supporting business analytics workflows.'
     ],
-    careerObjective: 'A dedicated Full Stack Developer with expertise in developing modern web applications using MongoDB, Express.js, React.js, and Node.js. Committed to building reliable, responsive, and user-centric applications while continuously improving technical skills in Artificial Intelligence, Data Analytics, and Full Stack Development.',
+    careerObjective: 'Mohamed Rasith is dedicated to building reliable, scalable, and user-friendly software solutions while continuously expanding his expertise in Full Stack Development, Testing, Artificial Intelligence, and Data Analytics. His goal is to contribute innovative ideas and high-quality technical solutions that create real-world impact.',
     skillCategories: [
       {
         category: 'Programming Languages',
-        skills: ['Java (Basic)', 'JavaScript']
+        skills: ['Python', 'JavaScript']
       },
       {
         category: 'Frontend Development',
-        skills: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Responsive Design']
+        skills: ['HTML', 'CSS', 'JavaScript', 'Responsive Web Design', 'MERN Stack']
       },
       {
         category: 'Backend & Database',
-        skills: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB']
+        skills: ['Node.js', 'Express.js', 'MongoDB', 'REST API Integration']
+      },
+      {
+        category: 'Analytics & Quality Assurance',
+        skills: ['Tableau', 'Data Analytics', 'Business Analytics', 'Software Testing', 'Debugging & Quality Assurance']
       },
       {
         category: 'Tools & Platforms',
-        skills: ['MERN Stack', 'Tableau', 'Git', 'GitHub', 'Visual Studio Code']
-      },
-      {
-        category: 'Core Competencies',
-        skills: ['Full Stack Development', 'Database Management', 'Data Analytics', 'Debugging & Testing', 'Problem Solving', 'Team Collaboration']
+        skills: ['Git', 'GitHub', 'Visual Studio Code', 'Tableau']
       }
     ],
     experience: [
       {
-        role: 'Chief Operating Officer',
+        role: 'Chief Operating Officer & Lead Tester',
         company: 'Network Navigator Pioneers (NNP)',
         period: '2026 - Present',
-        description: 'Managing end-to-end operational efficiency, client execution lifecycles, project governance, and internal team coordination.'
+        description: 'Overseeing company operations, quality assurance, project execution, and cross-functional team coordination.'
       },
       {
         role: 'Deep Learning Intern',
         company: 'TRIOS Technologies Pvt. Ltd.',
         period: '2024',
-        description: 'Worked on Deep Learning concepts and Artificial Intelligence applications. Gained practical experience in model design and implementation.'
+        description: 'Worked on Artificial Intelligence and Deep Learning concepts while gaining practical exposure to machine learning model design and implementation.'
       },
       {
         role: 'Full Stack Development Intern',
         company: 'F5 Coders',
         period: '2024',
-        description: 'Worked on frontend, backend, and database integration using the MERN Stack. Contributed to complete end-to-end web application development.'
+        description: 'Worked on frontend development, backend development, API integration, and database connectivity while building complete web applications.'
       },
       {
         role: 'Business Analytics Intern',
         company: 'Cognifyz Technologies',
         period: '2024',
-        description: 'Worked on business analytics, reporting, and data visualization using Tableau and analytics tools. Supported data-driven decision-making.'
+        description: 'Worked on business analytics, reporting, visualization, and data-driven decision making using analytical techniques.'
       }
     ],
     projects: [
@@ -400,10 +402,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
         title: 'Hospital Management Portal',
         tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'REST APIs'],
         description: [
-          'Built a complete Hospital Management Portal using the MERN Stack.',
-          'Implemented Patient Record Management and Appointment Scheduling.',
-          'Created Doctor–Patient Communication channels and REST API services.',
-          'Integrated MongoDB database schemas with a clean, responsive user interface.'
+          'Designed and developed a complete Hospital Management Portal that simplifies patient record management, appointment scheduling, doctor-patient communication, and hospital administration.',
+          'Integrated full stack database connectivity with a clean, responsive web user interface.'
         ],
         tag: 'Full Stack MERN'
       },
@@ -411,10 +411,19 @@ export const TEAM_MEMBERS: TeamMember[] = [
         title: 'Student Sync Space',
         tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js'],
         description: [
-          'Developed a collaborative student platform for academic management, communication, and resource sharing.',
-          'Implemented responsive React components and RESTful backend services for seamless real-time data updates.'
+          'Developed a collaborative student platform that supports academic management, communication, resource sharing, and organized student activities through an interactive web application.',
+          'Built responsive components and RESTful backend APIs for real-time academic workflows.'
         ],
-        tag: 'MERN Collaboration'
+        tag: 'Full Stack MERN'
+      },
+      {
+        title: 'Student Habit Performance Analysis',
+        tech: ['Python', 'Data Analytics', 'Tableau', 'Data Visualization'],
+        description: [
+          'Built a data analytics project focused on improving students\' study habits, productivity, time management, and personal growth through analytical insights and structured planning.',
+          'Helped students set goals, organize study schedules, and build consistent learning routines while strengthening analytical planning skills.'
+        ],
+        tag: 'Data Analytics'
       }
     ],
     education: [
@@ -429,34 +438,46 @@ export const TEAM_MEMBERS: TeamMember[] = [
     certificates: [
       {
         title: 'Full Stack Development',
-        description: 'F5 Coders certification in end-to-end MERN Stack application building.'
+        description: 'F5 Coders certification in full stack web application development.'
       },
       {
         title: 'MongoDB Basics',
-        description: 'MongoDB Skills certification covering NoSQL database management & queries.'
+        description: 'MongoDB Skills certification covering NoSQL database management.'
       },
       {
         title: 'Business Analytics',
         description: 'Cognifyz Technologies certification in data visualization and reporting.'
+      },
+      {
+        title: 'Test Engineer',
+        description: 'Infosys Foundation certification in software testing and quality assurance.'
+      },
+      {
+        title: 'Data Analytics',
+        description: 'IBM certification in data analytics and data-driven problem solving.'
       }
     ],
     strengths: [
-      'Full Stack MERN',
-      'Database Management',
-      'Business Analytics',
-      'Debugging & Testing',
+      'Strong Analytical Thinking',
+      'Software Quality Assurance',
+      'Full Stack Development',
+      'Data Analysis',
       'Problem Solving',
-      'Team Collaboration'
+      'Continuous Learning',
+      'Team Collaboration',
+      'Technical Adaptability'
     ],
     languages: ['English', 'Tamil'],
     achievements: [
-      'Co-founded Network Navigator Pioneers (NNP) and leading company operations.',
-      'Completed triple internships in Deep Learning (TRIOS), Full Stack (F5 Coders), and Business Analytics (Cognifyz).',
-      'Developed Hospital Management Portal and Student Sync Space platforms.'
+      'Co-founded Network Navigator Pioneers (NNP) and leading company operations & software quality control.',
+      'Completed triple internships in Deep Learning (TRIOS), Full Stack Development (F5 Coders), and Business Analytics (Cognifyz).',
+      'Developed Hospital Management Portal, Student Sync Space, and Student Habit Performance Analysis systems.',
+      'Earned certifications in Full Stack Development, Test Engineering (Infosys), Data Analytics (IBM), MongoDB, and Business Analytics.'
     ],
     contact: {
       email: 'mdrazzth@gmail.com',
-      location: 'Tamil Nadu, India',
+      phone: '+91 6369484756',
+      location: 'Perambalur, Tamil Nadu, India',
       linkedin: 'https://www.linkedin.com/in/md-rasith?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: 'https://github.com/Rasith-27'
     }
