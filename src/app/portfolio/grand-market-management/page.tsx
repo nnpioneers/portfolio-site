@@ -144,21 +144,21 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Customer Dashboard',
     category: 'Customer App',
     description: 'Orders, wishlist, saved addresses, notifications, and profile.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-customer-dashboard.png'
   },
   {
     id: 8,
     title: 'Admin Dashboard',
     category: 'Admin Dashboard',
     description: 'Business analytics, revenue, customer statistics, and sales overview.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-admin-dashboard.png'
   },
   {
     id: 9,
     title: 'Product Management',
     category: 'Admin Dashboard',
     description: 'Admin panel for adding, editing, deleting, and organizing products.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-product-management.png'
   },
   {
     id: 10,
