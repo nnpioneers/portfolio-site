@@ -149,7 +149,11 @@ function RegistrationFormContent() {
     // Student specific fields
     institution: '',
     degree: '',
+    department: '',
     yearOfStudy: 'Final Year',
+    skills: '',
+    interestedDomain: 'Full Stack Web Development (React/Node)',
+    internshipDuration: '2–3 Months',
     githubOrPortfolio: '',
 
     // Business Partner specific fields
@@ -313,7 +317,23 @@ function RegistrationFormContent() {
             Our team will review your application and contact you within <span className="text-white font-bold">24–48 hours</span> through your preferred communication method.
           </p>
 
-          {selectedRole === 'client' && (
+          {selectedRole === 'student' ? (
+            <div className="bg-purple-950/40 p-6 md:p-8 rounded-2xl border border-purple-500/40 text-left max-w-lg mx-auto mb-10 text-xs md:text-sm space-y-3 shadow-[0_0_30px_rgba(168,85,247,0.2)]">
+              <div className="flex items-center gap-2 text-purple-300 font-bold text-base border-b border-purple-500/30 pb-3">
+                <Sparkles className="w-5 h-5 text-purple-400" /> ✅ Pre-Registration Successful!
+              </div>
+              <p className="text-gray-200 font-medium text-xs md:text-sm leading-relaxed font-body">
+                Thank you for your interest in joining NNP. Your details have been saved successfully.
+              </p>
+              <p className="text-gray-300 text-xs leading-relaxed font-body">
+                Our internship program is currently under preparation. Once registrations officially open, we will contact you using your registered email address (<span className="text-white font-semibold">{formData.email}</span>).
+              </p>
+              <div className="flex justify-between border-t border-purple-500/30 pt-3 text-xs">
+                <span className="text-gray-400">Waiting List Status:</span>
+                <span className="font-mono text-purple-300 font-bold">#NNP-INTERN-PRE</span>
+              </div>
+            </div>
+          ) : selectedRole === 'client' && (
             <div className="bg-white/5 p-6 rounded-2xl border border-white/10 text-left max-w-lg mx-auto mb-10 text-xs md:text-sm space-y-2.5">
               <div className="flex justify-between border-b border-white/10 pb-2">
                 <span className="text-gray-400">Request ID:</span>
@@ -415,28 +435,31 @@ function RegistrationFormContent() {
             </div>
           </div>
 
-          {/* Path 2: Student / Intern */}
+          {/* Path 2: Internship Pre-Registration */}
           <div 
             onClick={() => {
               setSelectedRole('student');
               setActiveStep(1);
             }}
-            className="glass-card p-8 rounded-3xl border border-white/10 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer hover:-translate-y-2 relative overflow-hidden flex flex-col justify-between"
+            className="glass-card p-8 rounded-3xl border border-purple-500/20 hover:border-purple-400/60 transition-all duration-300 group cursor-pointer hover:-translate-y-2 relative overflow-hidden flex flex-col justify-between"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-purple-500/20 transition-all"></div>
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-black transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-black transition-all">
                 <GraduationCap className="w-7 h-7" />
               </div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-mono font-bold uppercase mb-2">
+                <Clock className="w-3 h-3 text-purple-400" /> Coming Soon
+              </div>
               <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-                Student / Intern
+                Internship Pre-Registration
               </h3>
               <p className="text-gray-400 text-sm font-body leading-relaxed mb-6">
-                Apply for internships, mentorship programs, hands-on projects, and tech training.
+                Pre-register for upcoming NNP internships, tech training, mentorship, and student projects.
               </p>
             </div>
             <div className="flex items-center gap-2 text-xs font-semibold text-purple-400 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-              Apply as Student <ArrowRight className="w-4 h-4" />
+              Join Waiting List <ArrowRight className="w-4 h-4" />
             </div>
           </div>
 
@@ -1148,56 +1171,181 @@ function RegistrationFormContent() {
             </form>
           )}
 
-          {/* STUDENT REGISTRATION FORM */}
+          {/* STUDENT / INTERNSHIP PRE-REGISTRATION FORM */}
           {selectedRole === 'student' && (
-            <form onSubmit={handleSubmit} className="glass-card p-8 md:p-10 rounded-3xl border border-white/10 relative shadow-2xl space-y-6">
-              <h2 className="text-2xl font-bold text-white border-b border-white/10 pb-4 flex items-center gap-2">
-                <GraduationCap className="w-6 h-6 text-purple-400" /> Student & Internship Application
-              </h2>
+            <div className="space-y-6">
+              {/* Premium Internship Program Coming Soon Banner */}
+              <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-r from-purple-950/60 via-slate-900/90 to-indigo-950/60 border border-purple-500/40 shadow-[0_0_35px_rgba(168,85,247,0.25)] relative overflow-hidden backdrop-blur-xl">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div className="flex items-start gap-4 relative z-10">
+                  <div className="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/50 text-purple-300 flex items-center justify-center shrink-0 shadow-lg">
+                    <Sparkles className="w-6 h-6 animate-pulse text-purple-400" />
+                  </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Full Name *</label>
-                  <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="e.g. Rahul Sharma" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Email Address *</label>
-                  <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="student@college.edu" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">College / Institution *</label>
-                  <input required type="text" name="institution" value={formData.institution} onChange={handleChange} placeholder="e.g. Anna University" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Degree / Specialization *</label>
-                  <input required type="text" name="degree" value={formData.degree} onChange={handleChange} placeholder="e.g. B.E. Computer Science" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">GitHub / Portfolio Link</label>
-                  <input type="url" name="githubOrPortfolio" value={formData.githubOrPortfolio} onChange={handleChange} placeholder="https://github.com/yourhandle" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Mobile Number *</label>
-                  <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-400/40 text-purple-300 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
+                      <Clock className="w-3.5 h-3.5 text-purple-400" /> Program Status: Under Preparation
+                    </div>
+
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight">
+                      🚀 Internship Program Coming Soon
+                    </h3>
+
+                    <p className="text-gray-300 text-xs md:text-sm font-body leading-relaxed mb-2">
+                      We are currently preparing our official Internship Program. Internship registrations are <strong className="text-purple-300 font-semibold">not open yet</strong>.
+                    </p>
+
+                    <p className="text-gray-300 text-xs md:text-sm font-body leading-relaxed mb-2">
+                      If you're interested in joining NNP as an intern, you can <strong className="text-white font-semibold">pre-register today</strong> to join our exclusive waiting list.
+                    </p>
+
+                    <p className="text-gray-300 text-xs md:text-sm font-body leading-relaxed">
+                      Once our internship program officially launches, our team will review your submission and contact you directly through your registered email. Thank you for your patience — we look forward to welcoming talented students to NNP.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Why do you want to join NNP? *</label>
-                <textarea required rows={4} name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} placeholder="Tell us about your coding skills, tech stack, and what you hope to achieve during internship..." className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
-              </div>
+              <form onSubmit={handleSubmit} className="glass-card p-8 md:p-10 rounded-3xl border border-white/10 relative shadow-2xl space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
+                  <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                    <GraduationCap className="w-6 h-6 text-purple-400" /> Internship Pre-Registration
+                  </h2>
+                  <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono font-semibold">
+                    Join Waiting List
+                  </span>
+                </div>
 
-              <div className="flex items-start bg-white/5 p-4 rounded-2xl border border-white/10">
-                <input required type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} id="agreeTermsStudent" className="mt-1 w-4 h-4 rounded text-purple-400 focus:ring-purple-400 cursor-pointer" />
-                <label htmlFor="agreeTermsStudent" className="ml-3 text-xs md:text-sm text-gray-300 cursor-pointer">
-                  I confirm that the information provided is accurate and I am ready to commit to NNP learning & project tasks.
-                </label>
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Full Name *</label>
+                    <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="e.g. Rahul Sharma" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Email Address *</label>
+                    <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="student@college.edu" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Mobile Number *</label>
+                    <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">College / Institution Name *</label>
+                    <input required type="text" name="institution" value={formData.institution} onChange={handleChange} placeholder="e.g. Anna University / DSEC" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Degree *</label>
+                    <input required type="text" name="degree" value={formData.degree} onChange={handleChange} placeholder="e.g. B.Tech / B.E. / B.Sc / BCA" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Department / Specialization *</label>
+                    <input required type="text" name="department" value={formData.department} onChange={handleChange} placeholder="e.g. Computer Science / AI & DS / IT" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Year of Study *</label>
+                    <select name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all">
+                      <option value="1st Year">1st Year</option>
+                      <option value="2nd Year">2nd Year</option>
+                      <option value="3rd Year">3rd Year</option>
+                      <option value="Final Year">Final Year</option>
+                      <option value="Passed Out / Recent Graduate">Passed Out / Recent Graduate</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Interested Domain *</label>
+                    <select name="interestedDomain" value={formData.interestedDomain} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all">
+                      <option value="Full Stack Web Development (React/Node)">Full Stack Web Development (React/Node)</option>
+                      <option value="Artificial Intelligence & Machine Learning">Artificial Intelligence & Machine Learning</option>
+                      <option value="Mobile Application Development">Mobile Application Development</option>
+                      <option value="UI/UX & Product Design">UI/UX & Product Design</option>
+                      <option value="Data Analytics & Science">Data Analytics & Science</option>
+                      <option value="Cloud Engineering & DevOps">Cloud Engineering & DevOps</option>
+                    </select>
+                  </div>
+                </div>
 
-              <button type="submit" disabled={loading} className="w-full btn-magnetic bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)]">
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Submit Student Application <Send className="w-5 h-5" /></>}
-              </button>
-            </form>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Technical Skills & Competencies *</label>
+                    <input required type="text" name="skills" value={formData.skills} onChange={handleChange} placeholder="e.g. Python, React, JavaScript, HTML/CSS, SQL, Git" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Expected Internship Duration *</label>
+                    <select name="internshipDuration" value={formData.internshipDuration} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all">
+                      <option value="1 Month">1 Month</option>
+                      <option value="2–3 Months">2–3 Months</option>
+                      <option value="6 Months">6 Months</option>
+                      <option value="Flexible">Flexible</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">GitHub / LinkedIn / Portfolio Link (Optional)</label>
+                  <input type="url" name="githubOrPortfolio" value={formData.githubOrPortfolio} onChange={handleChange} placeholder="https://github.com/yourhandle or LinkedIn profile URL" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Why do you want to intern at NNP? *</label>
+                  <textarea required rows={4} name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} placeholder="Tell us about your background, projects, interest in technology, and what you hope to achieve during an NNP internship..." className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Upload Resume (PDF - Optional)</label>
+                  <div className="border-2 border-dashed border-white/20 rounded-2xl p-5 text-center hover:border-purple-400/50 transition-colors bg-white/[0.02]">
+                    <Upload className="w-7 h-7 mx-auto text-purple-400 mb-2" />
+                    <p className="text-xs font-medium text-gray-300 mb-1">
+                      Drag and drop your PDF resume here, or <span className="text-purple-400 underline cursor-pointer">browse</span>
+                    </p>
+                    <p className="text-[11px] text-gray-500 mb-3">Supports PDF format (Max 10MB)</p>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                      id="student-resume-input"
+                    />
+                    <label
+                      htmlFor="student-resume-input"
+                      className="inline-block px-4 py-1.5 rounded-xl bg-white/10 text-white text-xs font-semibold cursor-pointer hover:bg-white/20 transition-all"
+                    >
+                      Choose PDF File
+                    </label>
+                    {formData.fileName && (
+                      <div className="mt-2 text-xs text-purple-300 font-mono">
+                        ✓ Attached: {formData.fileName}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex items-start bg-white/5 p-4 rounded-2xl border border-white/10">
+                  <input required type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} id="agreeTermsStudent" className="mt-1 w-4 h-4 rounded text-purple-400 focus:ring-purple-400 cursor-pointer" />
+                  <label htmlFor="agreeTermsStudent" className="ml-3 text-xs md:text-sm text-gray-300 cursor-pointer">
+                    I confirm that the information provided is accurate and I agree to join the NNP Internship waiting list.
+                  </label>
+                </div>
+
+                <div className="space-y-3">
+                  <button type="submit" disabled={loading} className="w-full btn-magnetic bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-4 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)] disabled:opacity-70">
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" /> Saving Pre-Registration...
+                      </>
+                    ) : (
+                      <>
+                        Join Waiting List (Pre-Register Now) <ArrowRight className="w-5 h-5" />
+                      </>
+                    )}
+                  </button>
+
+                  <p className="text-[11px] text-gray-400 text-center font-body">
+                    📌 This is a pre-registration only. Internship offers are <strong className="text-white font-semibold">not currently open</strong>. Selected candidates will receive an email once registrations begin.
+                  </p>
+                </div>
+              </form>
+            </div>
           )}
 
           {/* BUSINESS PARTNER REGISTRATION FORM */}
