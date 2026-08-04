@@ -1260,23 +1260,23 @@ function RegistrationFormContent() {
                   </div>
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Year of Study *</label>
-                    <select name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all">
-                      <option value="1st Year">1st Year</option>
-                      <option value="2nd Year">2nd Year</option>
-                      <option value="3rd Year">3rd Year</option>
-                      <option value="Final Year">Final Year</option>
-                      <option value="Passed Out / Recent Graduate">Passed Out / Recent Graduate</option>
+                    <select name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all cursor-pointer">
+                      <option value="1st Year" className="bg-slate-900 text-white">1st Year</option>
+                      <option value="2nd Year" className="bg-slate-900 text-white">2nd Year</option>
+                      <option value="3rd Year" className="bg-slate-900 text-white">3rd Year</option>
+                      <option value="Final Year" className="bg-slate-900 text-white">Final Year</option>
+                      <option value="Passed Out / Recent Graduate" className="bg-slate-900 text-white">Passed Out / Recent Graduate</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Interested Domain *</label>
-                    <select name="interestedDomain" value={formData.interestedDomain} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all">
-                      <option value="Full Stack Web Development (React/Node)">Full Stack Web Development (React/Node)</option>
-                      <option value="Artificial Intelligence & Machine Learning">Artificial Intelligence & Machine Learning</option>
-                      <option value="Mobile Application Development">Mobile Application Development</option>
-                      <option value="UI/UX & Product Design">UI/UX & Product Design</option>
-                      <option value="Data Analytics & Science">Data Analytics & Science</option>
-                      <option value="Cloud Engineering & DevOps">Cloud Engineering & DevOps</option>
+                    <select name="interestedDomain" value={formData.interestedDomain} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all cursor-pointer">
+                      <option value="Full Stack Web Development (React/Node)" className="bg-slate-900 text-white">Full Stack Web Development (React/Node)</option>
+                      <option value="Artificial Intelligence & Machine Learning" className="bg-slate-900 text-white">Artificial Intelligence & Machine Learning</option>
+                      <option value="Mobile Application Development" className="bg-slate-900 text-white">Mobile Application Development</option>
+                      <option value="UI/UX & Product Design" className="bg-slate-900 text-white">UI/UX & Product Design</option>
+                      <option value="Data Analytics & Science" className="bg-slate-900 text-white">Data Analytics & Science</option>
+                      <option value="Cloud Engineering & DevOps" className="bg-slate-900 text-white">Cloud Engineering & DevOps</option>
                     </select>
                   </div>
                 </div>
@@ -1288,11 +1288,11 @@ function RegistrationFormContent() {
                   </div>
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Expected Internship Duration *</label>
-                    <select name="internshipDuration" value={formData.internshipDuration} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all">
-                      <option value="1 Month">1 Month</option>
-                      <option value="2–3 Months">2–3 Months</option>
-                      <option value="6 Months">6 Months</option>
-                      <option value="Flexible">Flexible</option>
+                    <select name="internshipDuration" value={formData.internshipDuration} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all cursor-pointer">
+                      <option value="1 Month" className="bg-slate-900 text-white">1 Month</option>
+                      <option value="2–3 Months" className="bg-slate-900 text-white">2–3 Months</option>
+                      <option value="6 Months" className="bg-slate-900 text-white">6 Months</option>
+                      <option value="Flexible" className="bg-slate-900 text-white">Flexible</option>
                     </select>
                   </div>
                 </div>
@@ -1543,14 +1543,14 @@ function RegistrationFormContent() {
                         name="collaborationType" 
                         value={formData.collaborationType} 
                         onChange={handleChange}
-                        className="w-full bg-slate-900 border border-amber-500/40 rounded-xl px-4 py-3.5 text-sm text-white focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                        className="w-full bg-slate-900 border border-amber-500/40 rounded-xl px-4 py-3.5 text-sm text-white focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all cursor-pointer"
                       >
-                        <option value="I Have a Startup Idea">💡 I Have a Startup Idea</option>
-                        <option value="I Have a Project">🚀 I Have a Project</option>
-                        <option value="I Want to Collaborate">🤝 I Want to Collaborate with NNP</option>
-                        <option value="I Want to Join the NNP Journey">💼 I Want to Join the NNP Journey</option>
-                        <option value="I Need Technical Guidance">🧠 I Need Technical Guidance</option>
-                        <option value="Other">🌐 Other Opportunity</option>
+                        <option value="I Have a Startup Idea" className="bg-slate-900 text-white">💡 I Have a Startup Idea</option>
+                        <option value="I Have a Project" className="bg-slate-900 text-white">🚀 I Have a Project</option>
+                        <option value="I Want to Collaborate" className="bg-slate-900 text-white">🤝 I Want to Collaborate with NNP</option>
+                        <option value="I Want to Join the NNP Journey" className="bg-slate-900 text-white">💼 I Want to Join the NNP Journey</option>
+                        <option value="I Need Technical Guidance" className="bg-slate-900 text-white">🧠 I Need Technical Guidance</option>
+                        <option value="Other" className="bg-slate-900 text-white">🌐 Other Opportunity</option>
                       </select>
                     </div>
 

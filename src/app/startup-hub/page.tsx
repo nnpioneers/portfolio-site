@@ -89,11 +89,11 @@ export default function StartupHubPage() {
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">Team Size</label>
-                                <select defaultValue="" className="w-full bg-slate-100 dark:bg-surfaceLight border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all appearance-none" required>
-                                    <option value="" disabled>Select team size</option>
-                                    <option>Solo Founder</option>
-                                    <option>2-5 Members</option>
-                                    <option>5+ Members</option>
+                                <select defaultValue="" className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all cursor-pointer" required>
+                                    <option value="" disabled className="bg-slate-900 text-gray-400">Select team size</option>
+                                    <option className="bg-slate-900 text-white">Solo Founder</option>
+                                    <option className="bg-slate-900 text-white">2-5 Members</option>
+                                    <option className="bg-slate-900 text-white">5+ Members</option>
                                 </select>
                             </div>
                         </div>
@@ -109,11 +109,11 @@ export default function StartupHubPage() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2">Current Stage *</label>
-                                <select defaultValue="" className="w-full bg-slate-100 dark:bg-surfaceLight border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all appearance-none" required>
-                                    <option value="" disabled>Select stage</option>
-                                    <option>Idea Stage</option>
-                                    <option>Prototyping / MVP Build</option>
-                                    <option>Pre-seed / Seed</option>
+                                <select defaultValue="" className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all cursor-pointer" required>
+                                    <option value="" disabled className="bg-slate-900 text-gray-400">Select stage</option>
+                                    <option className="bg-slate-900 text-white">Idea Stage</option>
+                                    <option className="bg-slate-900 text-white">Prototyping / MVP Build</option>
+                                    <option className="bg-slate-900 text-white">Pre-seed / Seed</option>
                                 </select>
                             </div>
                         </div>
