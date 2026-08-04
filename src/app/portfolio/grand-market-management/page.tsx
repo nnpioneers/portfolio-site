@@ -102,21 +102,21 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Homepage',
     category: 'Customer App',
     description: 'Customer landing page with featured products and categories.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-homepage.jpg'
   },
   {
     id: 2,
     title: 'Product Listing',
     category: 'Products',
     description: 'Browse fruits, vegetables, groceries, snacks, beverages, and household essentials.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-product-listing.png'
   },
   {
     id: 3,
     title: 'Product Details',
     category: 'Shopping',
     description: 'Complete product page with images, price, stock, reviews, and add-to-cart.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-product-details.jpg'
   },
   {
     id: 4,
