@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/services',
     '/portfolio',
+    '/portfolio/grand-market-management',
     '/portfolio/hospital-management',
     '/portfolio/hotelpro',
     '/registration',

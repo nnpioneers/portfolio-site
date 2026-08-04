@@ -129,6 +129,38 @@ export default function PortfolioPage() {
           </div>
         </div>
 
+        {/* Project: Grand Market Management System */}
+        <div className="glass-card rounded-3xl overflow-hidden group service-card border border-emerald-500/30 hover:border-emerald-500/60 transition-all duration-300 shadow-[0_0_25px_rgba(16,185,129,0.15)]">
+          <div className="h-64 bg-slate-900 relative overflow-hidden flex items-center justify-center">
+            <Image
+              src="/images/grand-market-card.jpg"
+              alt="Grand Market Management System"
+              fill
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+              unoptimized
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span className="px-4 py-1.5 rounded-full bg-emerald-600/80 backdrop-blur-md text-white text-xs font-bold tracking-widest uppercase">
+                View Case Study
+              </span>
+            </div>
+          </div>
+          <div className="p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-xs font-bold tracking-widest text-emerald-400 uppercase">MARKET MANAGEMENT</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-600"></span>
+              <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">NEXT.JS + NODE.JS + MONGODB</span>
+            </div>
+            <h3 className="text-2xl font-bold mb-3 text-white">Grand Market Management System</h3>
+            <p className="text-gray-400 font-body text-sm mb-6 line-clamp-2">
+              A complete digital marketplace platform built for supermarkets and family stores, enabling customers to purchase groceries, vegetables, fruits, snacks, beverages, household essentials, and daily needs online with an intuitive shopping experience.
+            </p>
+            <Link href="/portfolio/grand-market-management" className="text-emerald-400 font-medium flex items-center gap-2 text-sm group-hover:underline">
+              View Case Study <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
         {/* Project 1: HotelPro Management System */}
         <div className="glass-card rounded-3xl overflow-hidden group service-card">
           <div className="h-64 bg-slate-900 relative overflow-hidden flex items-center justify-center">
