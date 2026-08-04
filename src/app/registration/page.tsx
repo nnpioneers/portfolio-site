@@ -158,7 +158,8 @@ function RegistrationFormContent() {
 
     // Business Partner specific fields
     businessType: 'Enterprise',
-    partnershipGoal: ''
+    partnershipGoal: '',
+    collaborationType: 'I Have a Startup Idea'
   });
 
   const [activeStep, setActiveStep] = useState(1);
@@ -332,6 +333,21 @@ function RegistrationFormContent() {
                 <span className="text-gray-400">Waiting List Status:</span>
                 <span className="font-mono text-purple-300 font-bold">#NNP-INTERN-PRE</span>
               </div>
+            </div>
+          ) : selectedRole === 'business' ? (
+            <div className="bg-amber-950/40 p-6 md:p-8 rounded-2xl border border-amber-500/40 text-left max-w-lg mx-auto mb-10 text-xs md:text-sm space-y-3 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+              <div className="flex items-center gap-2 text-amber-300 font-bold text-base border-b border-amber-500/30 pb-3">
+                <Sparkles className="w-5 h-5 text-amber-400" /> 🎉 Thank You!
+              </div>
+              <p className="text-gray-200 font-medium text-xs md:text-sm leading-relaxed font-body">
+                Your request has been received successfully.
+              </p>
+              <p className="text-gray-300 text-xs leading-relaxed font-body">
+                Our team will carefully review your idea, project, or collaboration request. If your proposal matches our vision or current opportunities, we will contact you through your registered email or phone number (<span className="text-white font-semibold">{formData.email}</span>).
+              </p>
+              <p className="text-gray-400 text-xs leading-relaxed font-body pt-2 border-t border-amber-500/20">
+                Thank you for your interest in becoming a part of the NNP ecosystem.
+              </p>
             </div>
           ) : selectedRole === 'client' && (
             <div className="bg-white/5 p-6 rounded-2xl border border-white/10 text-left max-w-lg mx-auto mb-10 text-xs md:text-sm space-y-2.5">
@@ -1348,48 +1364,276 @@ function RegistrationFormContent() {
             </div>
           )}
 
-          {/* BUSINESS PARTNER REGISTRATION FORM */}
+          {/* BUSINESS COLLABORATION PORTAL */}
           {selectedRole === 'business' && (
-            <form onSubmit={handleSubmit} className="glass-card p-8 md:p-10 rounded-3xl border border-white/10 relative shadow-2xl space-y-6">
-              <h2 className="text-2xl font-bold text-white border-b border-white/10 pb-4 flex items-center gap-2">
-                <Building2 className="w-6 h-6 text-accent" /> Enterprise Partnership Inquiry
-              </h2>
+            <div className="space-y-8 animate-fadeIn">
+              {/* Hero Banner Section */}
+              <div className="p-8 md:p-10 rounded-3xl bg-gradient-to-r from-amber-950/50 via-slate-900/90 to-yellow-950/50 border border-amber-500/40 shadow-[0_0_40px_rgba(245,158,11,0.2)] relative overflow-hidden backdrop-blur-xl">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+                    <Building2 className="w-4 h-4 text-amber-400" /> Business Collaboration Portal
+                  </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Contact Person Name *</label>
-                  <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="e.g. Vikram Sethi" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-accent focus:ring-1 focus:ring-accent transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Company / Enterprise Name *</label>
-                  <input required type="text" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="e.g. Apex Global Solutions" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-accent focus:ring-1 focus:ring-accent transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Official Email *</label>
-                  <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="partner@enterprise.com" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-accent focus:ring-1 focus:ring-accent transition-all" />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Mobile / WhatsApp *</label>
-                  <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-accent focus:ring-1 focus:ring-accent transition-all" />
+                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                    🤝 Let's Build Something Amazing Together
+                  </h2>
+
+                  <p className="text-gray-200 text-sm md:text-lg font-body leading-relaxed max-w-3xl mb-3">
+                    Whether you have an idea, a project, or simply want to collaborate with NNP, we're excited to hear from you.
+                  </p>
+
+                  <p className="text-gray-400 text-xs md:text-sm font-body leading-relaxed max-w-3xl">
+                    We believe great ideas become successful businesses through collaboration, innovation, and the right technical team.
+                  </p>
                 </div>
               </div>
 
+              {/* 4 Interactive Collaboration Category Cards */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Partnership Objective *</label>
-                <textarea required rows={4} name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} placeholder="Describe how your company would like to partner with NNP (e.g., Software Outsourcing, Joint Bidding, White-labeling)..." className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-accent focus:ring-1 focus:ring-accent transition-all" />
+                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-amber-400" /> Choose Your Collaboration Pathway
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                  {/* Category 1: I Have an Idea */}
+                  <div 
+                    onClick={() => setFormData(prev => ({ ...prev, collaborationType: 'I Have a Startup Idea' }))}
+                    className={`p-6 rounded-2xl border transition-all cursor-pointer group relative overflow-hidden flex flex-col justify-between ${
+                      formData.collaborationType === 'I Have a Startup Idea'
+                        ? 'bg-amber-950/40 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.3)] scale-[1.01]'
+                        : 'bg-white/5 border-white/10 hover:border-amber-400/50 hover:bg-white/10'
+                    }`}
+                  >
+                    <div>
+                      <div className="text-2xl mb-2">💡</div>
+                      <h4 className="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                        I Have an Idea
+                      </h4>
+                      <p className="text-xs text-gray-300 font-body leading-relaxed">
+                        I have a startup or business idea but don't know how to build it. I need guidance, planning, and technical support from the NNP team.
+                      </p>
+                    </div>
+                    <div className="mt-4 text-[11px] font-semibold text-amber-400 font-mono uppercase tracking-wider flex items-center gap-1">
+                      {formData.collaborationType === 'I Have a Startup Idea' ? '✓ Selected Pathway' : 'Click to Select →'}
+                    </div>
+                  </div>
+
+                  {/* Category 2: I Have a Project */}
+                  <div 
+                    onClick={() => setFormData(prev => ({ ...prev, collaborationType: 'I Have a Project' }))}
+                    className={`p-6 rounded-2xl border transition-all cursor-pointer group relative overflow-hidden flex flex-col justify-between ${
+                      formData.collaborationType === 'I Have a Project'
+                        ? 'bg-amber-950/40 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.3)] scale-[1.01]'
+                        : 'bg-white/5 border-white/10 hover:border-amber-400/50 hover:bg-white/10'
+                    }`}
+                  >
+                    <div>
+                      <div className="text-2xl mb-2">🚀</div>
+                      <h4 className="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                        I Have a Project
+                      </h4>
+                      <p className="text-xs text-gray-300 font-body leading-relaxed">
+                        I already have a project or concept. I need NNP to help design, develop, improve, or complete it through collaboration.
+                      </p>
+                    </div>
+                    <div className="mt-4 text-[11px] font-semibold text-amber-400 font-mono uppercase tracking-wider flex items-center gap-1">
+                      {formData.collaborationType === 'I Have a Project' ? '✓ Selected Pathway' : 'Click to Select →'}
+                    </div>
+                  </div>
+
+                  {/* Category 3: I Want to Collaborate with NNP */}
+                  <div 
+                    onClick={() => setFormData(prev => ({ ...prev, collaborationType: 'I Want to Collaborate' }))}
+                    className={`p-6 rounded-2xl border transition-all cursor-pointer group relative overflow-hidden flex flex-col justify-between ${
+                      formData.collaborationType === 'I Want to Collaborate'
+                        ? 'bg-amber-950/40 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.3)] scale-[1.01]'
+                        : 'bg-white/5 border-white/10 hover:border-amber-400/50 hover:bg-white/10'
+                    }`}
+                  >
+                    <div>
+                      <div className="text-2xl mb-2">🤝</div>
+                      <h4 className="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                        I Want to Collaborate with NNP
+                      </h4>
+                      <p className="text-xs text-gray-300 font-body leading-relaxed">
+                        I would like to collaborate with NNP on innovative products, startups, research, technology, or business opportunities.
+                      </p>
+                    </div>
+                    <div className="mt-4 text-[11px] font-semibold text-amber-400 font-mono uppercase tracking-wider flex items-center gap-1">
+                      {formData.collaborationType === 'I Want to Collaborate' ? '✓ Selected Pathway' : 'Click to Select →'}
+                    </div>
+                  </div>
+
+                  {/* Category 4: I Want to Join the NNP Journey */}
+                  <div 
+                    onClick={() => setFormData(prev => ({ ...prev, collaborationType: 'I Want to Join the NNP Journey' }))}
+                    className={`p-6 rounded-2xl border transition-all cursor-pointer group relative overflow-hidden flex flex-col justify-between ${
+                      formData.collaborationType === 'I Want to Join the NNP Journey'
+                        ? 'bg-amber-950/40 border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.3)] scale-[1.01]'
+                        : 'bg-white/5 border-white/10 hover:border-amber-400/50 hover:bg-white/10'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="text-2xl">💼</div>
+                        <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[9px] font-mono font-bold uppercase border border-amber-500/30">
+                          Expression of Interest
+                        </span>
+                      </div>
+                      <h4 className="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                        I Want to Join the NNP Journey
+                      </h4>
+                      <p className="text-xs text-gray-300 font-body leading-relaxed mb-2">
+                        I love what NNP is building. I would like to become a part of the NNP ecosystem and contribute my skills whenever opportunities become available.
+                      </p>
+                      <p className="text-[10px] text-amber-300/80 font-mono italic">
+                        * This is an expression of interest only. It is NOT a job application.
+                      </p>
+                    </div>
+                    <div className="mt-4 text-[11px] font-semibold text-amber-400 font-mono uppercase tracking-wider flex items-center gap-1">
+                      {formData.collaborationType === 'I Want to Join the NNP Journey' ? '✓ Selected Pathway' : 'Click to Select →'}
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex items-start bg-white/5 p-4 rounded-2xl border border-white/10">
-                <input required type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} id="agreeTermsBiz" className="mt-1 w-4 h-4 rounded text-accent focus:ring-accent cursor-pointer" />
-                <label htmlFor="agreeTermsBiz" className="ml-3 text-xs md:text-sm text-gray-300 cursor-pointer">
-                  I confirm that I am an authorized representative of this enterprise.
-                </label>
-              </div>
+              {/* Collaboration Request Form */}
+              <form onSubmit={handleSubmit} className="glass-card p-8 md:p-10 rounded-3xl border border-white/10 relative shadow-2xl space-y-6">
+                <h3 className="text-2xl font-bold text-white border-b border-white/10 pb-4 flex items-center gap-2">
+                  <Building2 className="w-6 h-6 text-amber-400" /> Collaboration Request Details
+                </h3>
 
-              <button type="submit" disabled={loading} className="w-full btn-magnetic bg-gradient-to-r from-accent to-secondary text-black py-4 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(234,179,8,0.4)]">
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Submit Partnership Inquiry <Send className="w-5 h-5" /></>}
-              </button>
-            </form>
+                {/* Personal Information */}
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-amber-400 tracking-wider mb-4 font-mono">
+                    1. Personal & Contact Information
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Full Name *</label>
+                      <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="e.g. Vikram Sethi" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Email Address *</label>
+                      <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="partner@company.com" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Mobile Number *</label>
+                      <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">City / Country *</label>
+                      <input required type="text" name="city" value={formData.city} onChange={handleChange} placeholder="e.g. Chennai, India" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Collaboration Intent */}
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-amber-400 tracking-wider mb-4 font-mono">
+                    2. Collaboration Objective & Vision
+                  </h4>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">What would you like to do? *</label>
+                      <select 
+                        name="collaborationType" 
+                        value={formData.collaborationType} 
+                        onChange={handleChange}
+                        className="w-full bg-slate-900 border border-amber-500/40 rounded-xl px-4 py-3.5 text-sm text-white focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all"
+                      >
+                        <option value="I Have a Startup Idea">💡 I Have a Startup Idea</option>
+                        <option value="I Have a Project">🚀 I Have a Project</option>
+                        <option value="I Want to Collaborate">🤝 I Want to Collaborate with NNP</option>
+                        <option value="I Want to Join the NNP Journey">💼 I Want to Join the NNP Journey</option>
+                        <option value="I Need Technical Guidance">🧠 I Need Technical Guidance</option>
+                        <option value="Other">🌐 Other Opportunity</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Project / Idea Title *</label>
+                      <input required type="text" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="e.g. Smart Logistics Platform / AI Healthcare Assistant" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all" />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Tell Us More *</label>
+                      <textarea 
+                        required 
+                        rows={5} 
+                        name="additionalNotes" 
+                        value={formData.additionalNotes} 
+                        onChange={handleChange} 
+                        placeholder="Describe your idea, project, collaboration request, or how you would like to work with NNP. The more details you provide, the better we can understand your vision." 
+                        className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all" 
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Upload Files (Optional - Pitch Decks, Specs, Diagrams)</label>
+                      <div className="border-2 border-dashed border-white/20 rounded-2xl p-5 text-center hover:border-amber-400/50 transition-colors bg-white/[0.02]">
+                        <Upload className="w-7 h-7 mx-auto text-amber-400 mb-2" />
+                        <p className="text-xs font-medium text-gray-300 mb-1">
+                          Drag and drop your file here, or <span className="text-amber-400 underline cursor-pointer">browse</span>
+                        </p>
+                        <p className="text-[11px] text-gray-500 mb-3">Accepts PDF, DOCX, PPT, PNG, JPG, Figma files (Max 25MB)</p>
+                        <input
+                          type="file"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                          id="biz-file-upload"
+                        />
+                        <label
+                          htmlFor="biz-file-upload"
+                          className="inline-block px-4 py-1.5 rounded-xl bg-white/10 text-white text-xs font-semibold cursor-pointer hover:bg-white/20 transition-all"
+                        >
+                          Choose File
+                        </label>
+                        {formData.fileName && (
+                          <div className="mt-2 text-xs text-amber-300 font-mono">
+                            ✓ Attached: {formData.fileName}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-start bg-white/5 p-4 rounded-2xl border border-white/10">
+                  <input required type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} id="agreeTermsBiz" className="mt-1 w-4 h-4 rounded text-amber-400 focus:ring-amber-400 cursor-pointer" />
+                  <label htmlFor="agreeTermsBiz" className="ml-3 text-xs md:text-sm text-gray-300 cursor-pointer">
+                    I confirm that the information provided is accurate and I agree to be contacted by the NNP team regarding this request.
+                  </label>
+                </div>
+
+                <button type="submit" disabled={loading} className="w-full btn-magnetic bg-gradient-to-r from-amber-500 to-yellow-400 text-black py-4 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(245,158,11,0.4)] disabled:opacity-70">
+                  {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Send Collaboration Request <Send className="w-5 h-5" /></>}
+                </button>
+
+                {/* Important Note Card */}
+                <div className="p-5 rounded-2xl bg-amber-950/30 border border-amber-500/30 text-left text-xs space-y-2 mt-6">
+                  <div className="font-bold text-amber-300 flex items-center gap-1.5 text-sm">
+                    📌 Please Note
+                  </div>
+                  <p className="text-gray-300 leading-relaxed font-body">
+                    This page is <strong className="text-white">not a job application portal</strong>. It is intended for:
+                  </p>
+                  <ul className="list-disc list-inside text-gray-300 space-y-1 font-body pl-1">
+                    <li>Sharing innovative ideas</li>
+                    <li>Requesting project collaboration</li>
+                    <li>Seeking technical guidance</li>
+                    <li>Expressing interest in joining the NNP journey</li>
+                    <li>Building long-term partnerships</li>
+                  </ul>
+                  <p className="text-gray-400 text-[11px] pt-2 border-t border-amber-500/20 font-body">
+                    If we find a suitable opportunity, our team will contact you directly.
+                  </p>
+                </div>
+              </form>
+            </div>
           )}
         </div>
       </div>
