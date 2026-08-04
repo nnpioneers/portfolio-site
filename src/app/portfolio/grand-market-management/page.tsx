@@ -99,86 +99,86 @@ interface GalleryItem {
 const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
-    title: 'Homepage',
+    title: 'Homepage & Marketplace Showcase',
     category: 'Customer App',
-    description: 'Customer landing page with featured products and categories.',
+    description: 'Modern, intuitive customer landing page featuring dynamic category grids, daily best deals, hero offers, bulk ordering portals, and 24/7 customer support access.',
     image: '/images/grand-market-homepage.jpg'
   },
   {
     id: 2,
-    title: 'Product Listing',
+    title: 'Smart Product Listing & Filters',
     category: 'Products',
-    description: 'Browse fruits, vegetables, groceries, snacks, beverages, and household essentials.',
+    description: 'Comprehensive product discovery catalog with real-time price filters, brand selection, stock badges, discount tags, and multi-view sorting.',
     image: '/images/grand-market-product-listing.png'
   },
   {
     id: 3,
-    title: 'Product Details',
+    title: 'Interactive Product Details',
     category: 'Shopping',
-    description: 'Complete product page with images, price, stock, reviews, and add-to-cart.',
+    description: 'Full-featured product page showcasing high-res image galleries, stock status, delivery estimations, seller information, and instant add-to-cart & buy-now actions.',
     image: '/images/grand-market-product-details.jpg'
   },
   {
     id: 4,
-    title: 'Shopping Cart',
+    title: 'Customer Shopping Cart',
     category: 'Shopping',
-    description: 'Customer shopping cart with quantity management and order summary.',
+    description: 'Dynamic cart management system featuring item quantity modifiers, promo code discounts, free delivery progress bar, and instant price calculations.',
     image: '/images/grand-market-shopping-cart.png'
   },
   {
     id: 5,
-    title: 'Checkout',
+    title: 'Frictionless Multi-Step Checkout',
     category: 'Checkout',
-    description: 'Secure checkout with address, payment, coupons, and delivery options.',
+    description: 'Secure 4-step checkout workflow with address management, instant payment gateway integration (UPI, Cards, NetBanking, COD), and slot delivery selection.',
     image: '/images/grand-market-checkout.png'
   },
   {
     id: 6,
-    title: 'Order Tracking',
+    title: 'Live Order Tracking & Timeline',
     category: 'Orders',
-    description: 'Live order tracking with order status timeline.',
+    description: 'Real-time order tracking dashboard displaying milestone status timelines, live map driver location, order summary, and instant invoice PDF downloads.',
     image: '/images/grand-market-order-tracking.png'
   },
   {
     id: 7,
-    title: 'Customer Dashboard',
+    title: 'Customer Account Dashboard',
     category: 'Customer App',
-    description: 'Orders, wishlist, saved addresses, notifications, and profile.',
+    description: 'Personalized customer portal for tracking active orders, viewing total savings, managing wishlist items, address books, and promotional coupons.',
     image: '/images/grand-market-customer-dashboard.png'
   },
   {
     id: 8,
-    title: 'Admin Dashboard',
+    title: 'Admin Command & Control Dashboard',
     category: 'Admin Dashboard',
-    description: 'Business analytics, revenue, customer statistics, and sales overview.',
+    description: 'Central executive control hub offering real-time revenue analytics, order status distribution pie charts, top selling products, and inventory stock alerts.',
     image: '/images/grand-market-admin-dashboard.png'
   },
   {
     id: 9,
-    title: 'Product Management',
+    title: 'Product Catalog Management',
     category: 'Admin Dashboard',
-    description: 'Admin panel for adding, editing, deleting, and organizing products.',
+    description: 'Powerful admin inventory suite for adding, editing, filtering, feature-flagging, and tracking stock levels across 1,200+ SKU product listings.',
     image: '/images/grand-market-product-management.png'
   },
   {
     id: 10,
-    title: 'Inventory Management',
+    title: 'Real-Time Inventory & Stock Management',
     category: 'Inventory',
-    description: 'Real-time stock monitoring with low-stock alerts and supplier information.',
+    description: 'Comprehensive stock monitoring suite with low-stock alerts, supplier tracking, warehouse location logs, stock status summaries, and reorder triggers.',
     image: '/images/grand-market-inventory-management.png'
   },
   {
     id: 11,
-    title: 'Order Management',
+    title: 'Order Fulfillment & Management Suite',
     category: 'Orders',
-    description: 'Pending, Processing, Packed, Delivered, Cancelled, and Refund management.',
+    description: 'End-to-end order processing ledger for filtering pending, shipped, delivered, and cancelled orders with detailed customer side-drawers and invoice controls.',
     image: '/images/grand-market-order-management.png'
   },
   {
     id: 12,
-    title: 'Sales Analytics',
+    title: 'Executive Sales & Revenue Analytics',
     category: 'Admin Dashboard',
-    description: 'Revenue charts, best-selling products, customer insights, and monthly reports.',
+    description: 'Deep business intelligence reporting suite featuring sales-by-category charts, payment method breakdowns, daily/monthly revenue trends, and profit margin statistics.',
     image: '/images/grand-market-sales-analysis.png'
   }
 ];
@@ -481,12 +481,12 @@ export default function GrandMarketCaseStudyPage() {
       {/* FULLSCREEN LIGHTBOX MODAL */}
       {selectedIndex !== null && filteredGalleryItems[selectedIndex] && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-4 sm:p-8 animate-fadeIn"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-3 sm:p-6 overflow-y-auto animate-fadeIn"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Top Bar: Title & Close Button */}
-          <div className="flex items-center justify-between z-20 w-full max-w-7xl mx-auto">
+          {/* Top Bar: Category Tag, Counter & Close Button */}
+          <div className="flex items-center justify-between z-30 w-full max-w-7xl mx-auto mb-2 shrink-0">
             <div className="flex items-center gap-3">
               <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono font-bold uppercase">
                 {filteredGalleryItems[selectedIndex].category}
@@ -498,7 +498,7 @@ export default function GrandMarketCaseStudyPage() {
 
             <button
               onClick={() => setSelectedIndex(null)}
-              className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all border border-white/20"
+              className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all border border-white/20 shrink-0"
               title="Close (Esc)"
             >
               <X className="w-6 h-6" />
@@ -506,44 +506,47 @@ export default function GrandMarketCaseStudyPage() {
           </div>
 
           {/* Center Image Container with Navigation Arrows */}
-          <div className="relative flex-1 flex items-center justify-center my-4 max-w-7xl mx-auto w-full">
+          <div className="relative flex-1 flex items-center justify-center my-2 max-w-7xl mx-auto w-full min-h-[250px]">
             {/* Prev Button */}
             <button
               onClick={handlePrev}
-              className="absolute left-2 sm:left-4 z-30 p-3 rounded-full bg-black/60 hover:bg-emerald-500 hover:text-black text-white border border-white/20 transition-all backdrop-blur-md"
+              className="absolute left-2 sm:left-4 z-30 p-3 rounded-full bg-black/70 hover:bg-emerald-500 hover:text-black text-white border border-white/20 transition-all backdrop-blur-md shadow-lg"
               title="Previous Screenshot (Left Arrow)"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
 
             {/* Main Preview Image */}
-            <div className="relative w-full h-full max-h-[75vh] flex items-center justify-center">
+            <div className="relative w-full h-full max-h-[58vh] flex items-center justify-center">
               <img
                 src={filteredGalleryItems[selectedIndex].image}
                 alt={filteredGalleryItems[selectedIndex].title}
-                className="max-h-full max-w-full object-contain rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.2)] border border-white/15"
+                className="max-h-full max-w-full object-contain rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.25)] border border-white/20"
               />
             </div>
 
             {/* Next Button */}
             <button
               onClick={handleNext}
-              className="absolute right-2 sm:right-4 z-30 p-3 rounded-full bg-black/60 hover:bg-emerald-500 hover:text-black text-white border border-white/20 transition-all backdrop-blur-md"
+              className="absolute right-2 sm:right-4 z-30 p-3 rounded-full bg-black/70 hover:bg-emerald-500 hover:text-black text-white border border-white/20 transition-all backdrop-blur-md shadow-lg"
               title="Next Screenshot (Right Arrow)"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
           </div>
 
-          {/* Bottom Caption Bar */}
-          <div className="w-full max-w-4xl mx-auto text-center bg-black/80 backdrop-blur-xl p-4 sm:p-6 rounded-2xl border border-white/15 z-20">
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+          {/* Bottom Caption Bar - Sharp, High-Contrast & Always Visible */}
+          <div className="w-full max-w-4xl mx-auto text-center bg-slate-900/90 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-emerald-500/30 z-30 shrink-0 shadow-[0_0_30px_rgba(0,0,0,0.9)] mt-2">
+            <div className="inline-flex items-center gap-2 mb-1 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-widest">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400" /> {filteredGalleryItems[selectedIndex].category} Screenshot
+            </div>
+            <h3 className="text-lg sm:text-2xl font-bold text-white mb-2 leading-tight">
               {filteredGalleryItems[selectedIndex].title}
             </h3>
-            <p className="text-gray-300 text-xs sm:text-sm font-body max-w-2xl mx-auto">
+            <p className="text-gray-200 text-xs sm:text-sm font-body leading-relaxed max-w-3xl mx-auto font-medium">
               {filteredGalleryItems[selectedIndex].description}
             </p>
-            <div className="mt-3 text-[10px] font-mono text-gray-500">
+            <div className="mt-2.5 pt-2 border-t border-white/10 text-[10px] font-mono text-gray-400">
               Use ← → arrow keys to navigate • Esc to close • Swipe on mobile
             </div>
           </div>
