@@ -123,21 +123,21 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Shopping Cart',
     category: 'Shopping',
     description: 'Customer shopping cart with quantity management and order summary.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-shopping-cart.png'
   },
   {
     id: 5,
     title: 'Checkout',
     category: 'Checkout',
     description: 'Secure checkout with address, payment, coupons, and delivery options.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-checkout.png'
   },
   {
     id: 6,
     title: 'Order Tracking',
     category: 'Orders',
     description: 'Live order tracking with order status timeline.',
-    image: '/images/grand-market-hero.jpg'
+    image: '/images/grand-market-order-tracking.png'
   },
   {
     id: 7,
