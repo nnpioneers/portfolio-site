@@ -95,7 +95,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       {
         role: 'Founder & Chief Executive Officer',
         company: 'Network Navigator Pioneers (NNP)',
-        period: '2024 - Present',
+        period: '2026 - Present',
         description: 'Directing overarching strategic direction, organizational expansion, AI/ML product innovation, and enterprise ecosystem building.'
       },
       {
@@ -236,7 +236,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       {
         role: 'Chief Technology Officer',
         company: 'Network Navigator Pioneers (NNP)',
-        period: '2024 - Present',
+        period: '2026 - Present',
         description: 'Overseeing technology strategy, AI platform development, cloud architecture, and engineering standards across the NNP ecosystem.'
       },
       {
@@ -373,7 +373,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       {
         role: 'Chief Operating Officer',
         company: 'Network Navigator Pioneers (NNP)',
-        period: '2024 - Present',
+        period: '2026 - Present',
         description: 'Managing end-to-end operational efficiency, client execution lifecycles, project governance, and internal team coordination.'
       },
       {
@@ -500,7 +500,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       {
         role: 'Chief Product Officer',
         company: 'Network Navigator Pioneers (NNP)',
-        period: '2024 - Present',
+        period: '2026 - Present',
         description: 'Directing global product design language, feature prioritization, UX engineering, product roadmap planning, and analytical user research.'
       },
       {
@@ -647,7 +647,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       {
         role: 'Co-Founder & Chief Financial Officer',
         company: 'Network Navigator Pioneers (NNP)',
-        period: '2024 - Present',
+        period: '2026 - Present',
         description: 'Overseeing corporate financial strategy, venture budgeting, investment modeling, and capital growth strategy across NNP operations.'
       },
       {
@@ -770,7 +770,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       {
         role: 'Manager',
         company: 'Network Navigator Pioneers (NNP)',
-        period: '2024 – Present',
+        period: '2026 - Present',
         description: 'Overseeing organizational workflow execution, client project coordination, operational standards, and cross-functional team alignment.'
       }
     ],
