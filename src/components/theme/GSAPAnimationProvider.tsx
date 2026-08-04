@@ -39,11 +39,11 @@ export default function GSAPAnimationProvider({ children }: { children: React.Re
                         // Preloader already done — animate immediately
                         triggerHeroAnim();
                     } else {
-                        // Wait for preloader, but no longer than 3s as a safety net
+                        // Wait for preloader, but no longer than 5s as a safety net
                         let fired = false;
                         const safetyTimer = setTimeout(() => {
                             if (!fired) { fired = true; triggerHeroAnim(); }
-                        }, 2500);
+                        }, 5000);
 
                         window.addEventListener('nnp-preloader-complete', () => {
                             if (!fired) {

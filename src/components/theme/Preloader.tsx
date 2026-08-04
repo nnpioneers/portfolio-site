@@ -38,35 +38,35 @@ export default function Preloader() {
             window.dispatchEvent(event);
         }, 0);
 
-        // 0.2s: Logo fades in and scales smoothly (0.5s duration)
-        tl.to(loaderAura, { opacity: 0.6, duration: 0.5, ease: "power2.out" }, 0.2);
-        tl.to(loaderLogo, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 0.2);
+        // 0.2s: Logo & aura fade in and scale smoothly (0.8s duration)
+        tl.to(loaderAura, { opacity: 0.6, duration: 0.8, ease: "power2.out" }, 0.2);
+        tl.to(loaderLogo, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }, 0.2);
 
-        // 0.5s: "WELCOME TO NNP" text appears (0.4s duration)
+        // 0.6s: "WELCOME TO NNP" text appears smoothly (0.6s duration)
         if (welcomeText) {
-            tl.to(welcomeText, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.5);
+            tl.to(welcomeText, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.6);
             
             tl.add(() => {
                 const event = new CustomEvent('nnp-fire-pulse');
                 window.dispatchEvent(event);
-            }, 0.8);
+            }, 1.1);
 
-            // 1.5s: Text fades out smoothly (0.3s duration)
-            tl.to(welcomeText, { opacity: 0, y: -8, duration: 0.3, ease: "power2.in" }, 1.5);
+            // 1.9s: Text fades out smoothly (0.5s duration) after a comfortable display window
+            tl.to(welcomeText, { opacity: 0, y: -8, duration: 0.5, ease: "power2.inOut" }, 1.9);
         } else {
             tl.add(() => {
                 const event = new CustomEvent('nnp-fire-pulse');
                 window.dispatchEvent(event);
-            }, 0.8);
+            }, 1.1);
         }
 
-        // 1.8s: Smooth fade-out & logo transition begins
+        // 2.4s: Smooth fade-out & logo transition begins
         tl.add(() => {
             // Fade out background loader container smoothly
             if (loader) {
                 gsap.to(loader, { 
                     opacity: 0, 
-                    duration: 0.7, 
+                    duration: 0.8, 
                     ease: "power2.inOut" 
                 });
             }
@@ -86,25 +86,25 @@ export default function Preloader() {
             const yMove = rectTarget.top - rectCurrent.top;
             const scaleChange = rectTarget.width / rectCurrent.width;
 
-            gsap.to(loaderAura, { opacity: 0, duration: 0.6, ease: "power3.inOut" });
+            gsap.to(loaderAura, { opacity: 0, duration: 0.7, ease: "power2.inOut" });
 
             gsap.to(loaderLogo, {
                 x: xMove,
                 y: yMove,
                 scale: scaleChange,
                 opacity: 0.9,
-                duration: 0.7,
+                duration: 0.8,
                 ease: "power3.inOut",
                 onComplete: () => {
                     setIsLoading(false);
                     gsap.set(navLogo, { opacity: 1 });
-                    if (navText) gsap.to(navText, { opacity: 1, duration: 0.4 });
+                    if (navText) gsap.to(navText, { opacity: 1, duration: 0.5 });
                     document.body.style.overflow = '';
                     document.documentElement.classList.add('preloader-complete');
                     window.dispatchEvent(new CustomEvent('nnp-preloader-complete'));
                 }
             });
-        }, 1.8);
+        }, 2.4);
 
     }, []);
 
