@@ -45,8 +45,6 @@ export class AuthenticationService {
   }
 
   public async login(credentials: any): Promise<AuthResponse> {
-    await new Promise(resolve => setTimeout(resolve, 600));
-
     if (!credentials.email || !credentials.password) {
       throw {
         type: AuthErrorType.INVALID_LOGIN,
@@ -54,87 +52,73 @@ export class AuthenticationService {
       } as AuthError;
     }
 
-    const cleanEmail = credentials.email.toLowerCase().trim();
-    const users = this.getRegisteredUsers();
-    const existing = users.find((u: any) => u.email.toLowerCase() === cleanEmail);
+    try {
+      const response = await fetch('http://localhost:4000/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: credentials.email.toLowerCase().trim(), password: credentials.password })
+      });
 
-    if (existing) {
-      if (existing.password && existing.password !== 'oauth_protected' && existing.password !== credentials.password) {
+      const data = await response.json();
+
+      if (!response.ok) {
         throw {
           type: AuthErrorType.INVALID_LOGIN,
-          message: 'Incorrect password. Please try again or use Forgot Password.'
+          message: data.message || 'Invalid email or password.'
         } as AuthError;
       }
 
       return {
-        user: existing,
-        token: 'nnp_jwt_token_' + Date.now(),
-        refreshToken: 'nnp_refresh_token_' + Date.now()
+        user: data.data.user,
+        token: data.data.accessToken,
+        refreshToken: data.data.refreshToken
       };
+    } catch (error: any) {
+      if (error.type === AuthErrorType.INVALID_LOGIN) throw error;
+      throw {
+        type: AuthErrorType.SYSTEM_ERROR,
+        message: 'Authentication service unavailable.'
+      } as AuthError;
     }
-
-    // Default system accounts
-    if (cleanEmail === 'admin@nnp.com' && credentials.password === 'admin') {
-      const adminUser = this.generateMockResponse('ADMIN', 'admin@nnp.com', 'NNP Admin').user;
-      this.saveUser(adminUser, 'admin');
-      return { user: adminUser, token: 'nnp_admin_token', refreshToken: 'nnp_admin_refresh' };
-    }
-
-    if (cleanEmail === 'user@nnp.com' && credentials.password === 'user') {
-      const demoUser = this.generateMockResponse('BUSINESS_OWNER', 'user@nnp.com', 'Demo User').user;
-      this.saveUser(demoUser, 'user');
-      return { user: demoUser, token: 'nnp_demo_token', refreshToken: 'nnp_demo_refresh' };
-    }
-
-    // Dynamic login for returning accounts
-    const formattedName = cleanEmail.split('@')[0].replace('.', ' ');
-    const capitalName = formattedName.charAt(0).toUpperCase() + formattedName.slice(1);
-    const newUser = this.generateMockResponse('CLIENT', cleanEmail, capitalName).user;
-    this.saveUser(newUser, credentials.password);
-
-    return {
-      user: newUser,
-      token: 'nnp_token_' + Date.now(),
-      refreshToken: 'nnp_refresh_' + Date.now()
-    };
   }
 
   public async register(data: any): Promise<AuthResponse> {
-    await new Promise(resolve => setTimeout(resolve, 800));
-
     const cleanEmail = (data.email || '').toLowerCase().trim();
-    if (!cleanEmail) {
+    if (!cleanEmail || !data.password) {
       throw {
         type: AuthErrorType.INVALID_LOGIN,
-        message: 'A valid email address is required for registration.'
+        message: 'Valid email address and password are required for registration.'
       } as AuthError;
     }
 
-    const name = data.name || cleanEmail.split('@')[0];
-    const newUser: User = {
-      id: 'usr_' + Math.random().toString(36).substr(2, 9),
-      name: name,
-      email: cleanEmail,
-      role: 'CLIENT',
-      status: 'ACTIVE',
-      createdDate: new Date().toISOString(),
-      preferences: {
-        language: 'en',
-        theme: 'dark',
-        notificationsEnabled: true
-      },
-      businessCount: 1,
-      projectCount: 3,
-      subscription: 'PRO'
-    };
+    try {
+      const response = await fetch('http://localhost:4000/api/v1/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: cleanEmail, name: data.name, password: data.password })
+      });
 
-    this.saveUser(newUser, data.password);
+      const resData = await response.json();
 
-    return {
-      user: newUser,
-      token: 'nnp_jwt_token_' + Date.now(),
-      refreshToken: 'nnp_refresh_token_' + Date.now()
-    };
+      if (!response.ok) {
+        throw {
+          type: AuthErrorType.INVALID_LOGIN,
+          message: resData.message || 'Registration failed.'
+        } as AuthError;
+      }
+
+      return {
+        user: resData.data.user,
+        token: resData.data.accessToken,
+        refreshToken: resData.data.refreshToken
+      };
+    } catch (error: any) {
+      if (error.type === AuthErrorType.INVALID_LOGIN) throw error;
+      throw {
+        type: AuthErrorType.SYSTEM_ERROR,
+        message: 'Authentication service unavailable.'
+      } as AuthError;
+    }
   }
 
   public async sendOtp(phone: string): Promise<boolean> {
@@ -167,13 +151,38 @@ export class AuthenticationService {
     };
   }
 
-  public async logout(): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 300));
+  public async logout(token?: string): Promise<void> {
+    if (!token) return;
+    try {
+      await fetch('http://localhost:4000/api/v1/auth/logout', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+    } catch (e) {
+      // Ignore network errors on logout
+    }
   }
 
   public async refresh(refreshToken: string): Promise<AuthResponse> {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    return this.generateMockResponse('CLIENT');
+    try {
+      const response = await fetch('http://localhost:4000/api/v1/auth/refresh', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refreshToken })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error('Refresh failed');
+      
+      // We are not passing full user data in refresh (the backend just sends tokens),
+      // but if the backend does send the user, we return it. Otherwise we rely on the existing user state.
+      return {
+        user: data.data.user || null,
+        token: data.data.accessToken,
+        refreshToken: data.data.refreshToken || refreshToken
+      };
+    } catch (e) {
+      throw { type: AuthErrorType.INVALID_LOGIN, message: 'Session expired' } as AuthError;
+    }
   }
 
   public async verify(token: string): Promise<boolean> {

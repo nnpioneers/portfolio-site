@@ -68,7 +68,7 @@ export class OpenAIProvider implements IAIProvider {
     // Creating one per request is bad practice, so we should really have a class level breaker.
     // However, since we must preserve existing architecture and just 'use it', let's define it.
     if (!this.breaker) {
-      const { CircuitBreakerFactory } = require('../../utils/resilience/CircuitBreakerFactory');
+      const { CircuitBreakerFactory } = require('../../../utils/resilience/CircuitBreakerFactory');
       this.breaker = CircuitBreakerFactory.create(async (op: () => Promise<AIResponse>) => {
         return RetryHandler.executeWithRetry(op);
       }, 'OpenAI_Generate');
