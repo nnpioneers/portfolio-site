@@ -7,6 +7,7 @@ import { RetryHandler } from './retry';
 
 export class OpenAIProvider implements IAIProvider {
   private client!: OpenAI;
+  private breaker: any;
 
   async init(config?: any): Promise<void> {
     this.client = new OpenAI({
@@ -63,7 +64,17 @@ export class OpenAIProvider implements IAIProvider {
       return this.parseResponse(response.choices[0].message?.content || '', response.usage, model);
     };
 
-    return RetryHandler.executeWithRetry(operation);
+    // We instantiate a transient breaker here or we can use a class-level one. 
+    // Creating one per request is bad practice, so we should really have a class level breaker.
+    // However, since we must preserve existing architecture and just 'use it', let's define it.
+    if (!this.breaker) {
+      const { CircuitBreakerFactory } = require('../../utils/resilience/CircuitBreakerFactory');
+      this.breaker = CircuitBreakerFactory.create(async (op: () => Promise<AIResponse>) => {
+        return RetryHandler.executeWithRetry(op);
+      }, 'OpenAI_Generate');
+    }
+
+    return this.breaker.fire(operation);
   }
 
   async *streamResponse(prompt: string, context: AIContext): AsyncGenerator<string, void, unknown> {

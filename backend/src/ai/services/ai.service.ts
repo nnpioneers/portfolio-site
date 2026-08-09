@@ -19,8 +19,9 @@ export class AIService {
   async chat(userId: string, message: string, history: any[]): Promise<AIResponse> {
     const context = MemoryEngine.compileContext(userId, history);
     
-    // In V3.0, we would inject PromptEngine logic here
+    // Inject PromptEngine logic
     const systemPrompt = PromptEngine.getSystemPrompt();
+    context.longTermSummary = systemPrompt; // Abusing longTermSummary temporarily to inject system prompt, or better yet, the provider maps longTermSummary as the system prompt.
     
     // Provider executes the response blindly, relying on the injected context
     return this.provider.generateResponse(message, context);

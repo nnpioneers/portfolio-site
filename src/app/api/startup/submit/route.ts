@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/server/config/db';
-import { StartupSubmissionModel } from '@/lib/server/database/schemas/startup-submission.schema.ts';
+import { DatabaseManager } from '@/lib/server/config/db';
+import { StartupSubmissionModel } from '@/lib/server/database/schemas/startup-submission.schema';
 import jwt from 'jsonwebtoken';
 
 // Use standard API response format for NNP if available, else simple JSON
 export async function POST(req: Request) {
   try {
-    await connectDB();
+    await DatabaseManager.getInstance().connect();
 
     // Verify authentication
     const authHeader = req.headers.get('authorization');

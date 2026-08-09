@@ -6,11 +6,9 @@ export class MemoryEngine {
    * Compiles the full conversation context window for the AI Provider.
    */
   static compileContext(userId: string, currentSession: any[]): AIContext {
-    // In V3.0 this will fetch long-term embeddings from a vector database
     return {
       userId,
-      shortTermHistory: currentSession.slice(-10), // Last 10 messages
-      longTermSummary: 'Mocked Long Term Summary: User is building a SaaS platform.'
+      shortTermHistory: currentSession.slice(-20), // Last 20 messages for recent context window
     };
   }
 

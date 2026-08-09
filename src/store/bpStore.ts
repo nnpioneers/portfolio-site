@@ -3,6 +3,7 @@ import { create } from 'zustand';
 export type BPMode = 'BUSINESS' | 'STARTUP' | 'STUDENT' | 'SOFTWARE' | 'CAREER' | 'MARKETING' | 'INVESTMENT' | 'GENERAL' | null;
 
 export interface BPContext {
+  conversationId: string | null;
   mode: BPMode;
   modeLabel: string | null;
   goal: string | null;
@@ -48,6 +49,7 @@ interface BPStore extends BPContext {
 }
 
 const initialState: Omit<BPContext, 'messages'> = {
+  conversationId: null,
   mode: null,
   modeLabel: null,
   goal: null,

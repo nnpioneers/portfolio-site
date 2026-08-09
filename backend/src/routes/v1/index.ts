@@ -6,6 +6,7 @@ import { authMiddleware } from '../../middleware/auth.middleware';
 import { SystemController } from '../../controllers/system.controller';
 
 import adminRoutes from './admin.routes';
+import aiRoutes from './ai.routes';
 
 const router = Router();
 const authController = new AuthController();
@@ -27,7 +28,8 @@ router.get('/system/health', systemController.getHealth);
 // Admin Routes (Protected by adminAuthMiddleware inside the file)
 router.use('/admin', adminRoutes);
 
-// Business, Project, Chat, etc. will follow this same pattern.
+// AI Routes
+router.use('/ai', aiRoutes);
 router.get('/health', (req, res) => {
   res.json({ status: 'v1_ok' });
 });

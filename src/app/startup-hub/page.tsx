@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Rocket, Users, Code, TrendingUp, FileUp, Lightbulb, PenTool, LayoutDashboard, Briefcase, Zap, ShieldCheck, ArrowRight, Loader2, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '@/features/authentication/context/AuthContext';
+import { useAuthStore } from '@/features/authentication/store/useAuthStore';
 
 export default function StartupHubPage() {
   const router = useRouter();
-  const { isAuthenticated, user, token } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const token = useAuthStore(state => state.token);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
