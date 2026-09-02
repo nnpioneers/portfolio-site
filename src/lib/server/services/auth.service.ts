@@ -83,4 +83,40 @@ export class AuthService {
     await this.userAdapter.update(userId, { refreshToken: undefined });
     return true;
   }
+
+  // --- Abstracted Features (Configuration Required) ---
+
+  async sendOtp(phone: string) {
+    if (!process.env.OTP_PROVIDER_API_KEY) {
+      throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'OTP Provider is not configured (CONFIGURATION REQUIRED)' };
+    }
+    // TODO: Implement actual OTP sending logic
+    return true;
+  }
+
+  async verifyOtp(phone: string, code: string) {
+    if (!process.env.OTP_PROVIDER_API_KEY) {
+      throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'OTP Provider is not configured (CONFIGURATION REQUIRED)' };
+    }
+    // TODO: Implement actual OTP verification logic
+    throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'OTP verification not implemented' };
+  }
+
+  async forgotPassword(email: string) {
+    // In a real scenario, this would send an email with a reset token
+    // For now, if no email provider is configured, fail clearly.
+    throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'Email Provider is not configured (CONFIGURATION REQUIRED)' };
+  }
+
+  async resetPassword(token: string, newPassword: string) {
+    throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'Password reset not implemented (CONFIGURATION REQUIRED)' };
+  }
+
+  async loginWithGoogle(token: string) {
+    if (!process.env.GOOGLE_CLIENT_SECRET || !process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID) {
+      throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'Google OAuth is not configured (CONFIGURATION REQUIRED)' };
+    }
+    // TODO: Verify Google token and link/create user
+    throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'Google login not implemented' };
+  }
 }

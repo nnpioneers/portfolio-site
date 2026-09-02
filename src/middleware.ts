@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { jwtVerify } from 'jose';
 
 /**
  * Authentication Middleware
  * 
  * Intercepts requests to enforce Protected Route architecture.
- * Currently configured in "pass-through" mode for Phase 2.1 UI preservation.
  */
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Define route types
@@ -15,26 +15,45 @@ export function middleware(request: NextRequest) {
   const protectedRoutes = ['/dashboard', '/profile', '/settings'];
   const adminRoutes = ['/admin'];
 
-  // Check token (Mock logic for V2.1)
+  // Check token (Phase 3: Real JWT Validation)
   const token = request.cookies.get('nnp_auth_token')?.value;
 
-  // Protect private routes
-  if (protectedRoutes.some(route => pathname.startsWith(route))) {
+  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
+  const isAdminRoute = adminRoutes.some(route => pathname.startsWith(route));
+
+  if (isProtectedRoute || isAdminRoute) {
     if (!token) {
       const loginUrl = new URL('/login', request.url);
       loginUrl.searchParams.set('from', pathname);
       return NextResponse.redirect(loginUrl);
     }
-  }
 
-  if (adminRoutes.some(route => pathname.startsWith(route))) {
-    // Requires JWT decoding to check role, not doing this in V2.1B since we only have mocked token
-    if (!token) {
-      return NextResponse.redirect(new URL('/login', request.url));
+    try {
+      const secret = new TextEncoder().encode(
+        process.env.JWT_SECRET || 'nnp_mock_secret'
+      );
+      
+      const { payload } = await jwtVerify(token, secret);
+      
+      if (isAdminRoute && payload.role !== 'ADMIN' && payload.role !== 'SUPER_ADMIN') {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+      }
+      
+    } catch (error) {
+      // Invalid or expired token
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('from', pathname);
+      
+      // We should ideally clear the invalid cookies, but Next.js middleware allows 
+      // setting cookies on the response, so we do it here.
+      const response = NextResponse.redirect(loginUrl);
+      response.cookies.delete('nnp_auth_token');
+      response.cookies.delete('refreshToken');
+      return response;
     }
   }
 
-  // Phase 2.1: Enforce Protection
+  // Pass-through for public or valid authenticated routes
   return NextResponse.next();
 }
 

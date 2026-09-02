@@ -19,7 +19,17 @@ export class DatabaseManager {
       return;
     }
 
-    const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/nnp_mock_db';
+    const uri = process.env.MONGODB_URI;
+
+    if (!uri) {
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('MONGODB_URI environment variable is missing. Database configuration is REQUIRED for production.');
+      } else if (process.env.NODE_ENV === 'test') {
+        throw new Error('MONGODB_URI environment variable is missing in test environment.');
+      } else {
+        throw new Error('MONGODB_URI environment variable is missing. Please check your .env file.');
+      }
+    }
 
     try {
       console.log('[MongoDB] Connecting to Atlas...');

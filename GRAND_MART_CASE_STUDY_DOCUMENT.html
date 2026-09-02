@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grand Market Management System — Full Specification & Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --primary: #10b981;
+      --primary-light: #34d399;
+      --teal: #14b8a6;
+      --cyan: #06b6d4;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Top Action Bar */
+    .action-bar {
+      position: sticky;
+      top: 1rem;
+      z-index: 50;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(16px);
+      padding: 1rem 1.5rem;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2.5rem;
+    }
+
+    .action-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--primary);
+    }
+
+    /* Content Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary-light);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 30%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--primary-light);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 1rem;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.4rem;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+
+    ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      color: #cbd5e1;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Code & Pre */
+    pre {
+      background: #060911;
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #a7f3d0;
+      margin: 1rem 0;
+      line-height: 1.5;
+    }
+
+    /* Print View */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0;
+      }
+      .action-bar {
+        display: none !important;
+      }
+      .card {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, p, td, th, ul li {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+      }
+      pre {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border-color: #cbd5e1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <div class="action-title">
+        <span>🛒 Grand Market Management System Document</span>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="downloadMarkdown()">
+          ⬇ Download Markdown (.md)
+        </button>
+        <button class="btn btn-secondary" onclick="window.print()">
+          🖨 Print / Save as PDF
+        </button>
+        <button class="btn btn-secondary" onclick="copyPrompt()">
+          📋 Copy AI Master Prompt
+        </button>
+      </div>
+    </div>
+
+    <!-- Header Card -->
+    <div class="card">
+      <span class="badge">Case Study & Technical Blueprint</span>
+      <h1>Grand Market Management System (Grand Mart)</h1>
+      <p style="font-size: 1.1rem; color: #cbd5e1;">
+        Complete enterprise specification, architectural design, 9 core modules, 12 screen user workflows, tech stack, and development blueprint.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08);">
+        <div>
+          <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--primary); font-weight: 700;">Developed By</span>
+          <p style="margin: 0; color: #fff; font-weight: 600;">NNP – Network Navigator Pioneers</p>
+        </div>
+        <div>
+          <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--primary); font-weight: 700;">Platform Category</span>
+          <p style="margin: 0; color: #fff; font-weight: 600;">Retail Marketplace & E-Commerce</p>
+        </div>
+        <div>
+          <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--primary); font-weight: 700;">Design Standard</span>
+          <p style="margin: 0; color: #fff; font-weight: 600;">Apple-Grade Dark Glassmorphism</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="card">
+      <h2>1. Project Overview & Core Mission</h2>
+      <p>
+        The <strong>Grand Market Management System</strong> is a full-stack omnichannel retail management and e-commerce shopping platform developed for supermarkets, hypermarkets, and family grocery stores.
+      </p>
+      <ul>
+        <li><strong>Consumer Convenience:</strong> Streamlined online grocery shopping with real-time stock availability, instant coupons, and scheduled delivery time slots.</li>
+        <li><strong>Store Command:</strong> Complete administrative control over 1,200+ product SKUs, supplier purchase orders, low-stock alerts, and 7-stage fulfillment dispatching.</li>
+        <li><strong>Revenue Intelligence:</strong> Real-time sales telemetry, payment method analysis, and top-performing product tracking.</li>
+      </ul>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="card">
+      <h2>2. Core System Modules (All 9 Modules)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Module Name</th>
+            <th>Primary Capabilities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Product Catalogue</strong></td>
+            <td>10+ categories (Produce, Groceries, Dairy, Snacks, Household), weight/volume variant pricing, discount tags.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Smart Search & Filters</strong></td>
+            <td>Sub-millisecond autocomplete search, faceted category/brand filters, price slider, in-stock toggles.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Dynamic Shopping Cart</strong></td>
+            <td>Slide-out drawer, instant price & GST calculation, free delivery milestone progress bar, coupon validator.</td>
+          </tr>
+          <tr>
+            <td><strong>4. Frictionless Checkout</strong></td>
+            <td>4-step checkout: Multiple saved addresses -> Delivery slot selector -> Multi-payment gateway -> Automated receipt.</td>
+          </tr>
+          <tr>
+            <td><strong>5. Customer Account Hub</strong></td>
+            <td>Live order tracking timeline, driver contact details, 1-click reorder ledger, instant PDF invoice download.</td>
+          </tr>
+          <tr>
+            <td><strong>6. Admin Command Hub</strong></td>
+            <td>Executive revenue metrics, order pipeline status, staff role permissions, low-stock warning table.</td>
+          </tr>
+          <tr>
+            <td><strong>7. Inventory Management</strong></td>
+            <td>Automated stock decrements, low-stock threshold alerts, perishable expiry tracker, warehouse aisle mapping.</td>
+          </tr>
+          <tr>
+            <td><strong>8. Order Fulfillment Suite</strong></td>
+            <td>7-state status pipeline (Pending -> Packing -> Dispatched -> Delivered), delivery driver assignment, customer note drawer.</td>
+          </tr>
+          <tr>
+            <td><strong>9. Revenue Analytics</strong></td>
+            <td>Daily/monthly revenue forecasting, category sales distribution pie charts, top SKU reports, payment method analytics.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="card">
+      <h2>3. 12 Core Application Screens & User Flows</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Screen Name</th>
+            <th>Target User</th>
+            <th>Key Features & Workflow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>Homepage & Marketplace Showcase</td>
+            <td>Customer</td>
+            <td>Hero promo carousel, flash sales with live timers, circular category quick links, bulk order portal.</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>Smart Product Listing & Filters</td>
+            <td>Customer</td>
+            <td>Grid/list toggle, brand checkboxes, dynamic price sliders, stock indicators, quick add-to-cart.</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Interactive Product Details (PDP)</td>
+            <td>Customer</td>
+            <td>Multi-angle zoom gallery, weight variant picker, estimated delivery slot, related product suggestions.</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td>Customer Shopping Cart</td>
+            <td>Customer</td>
+            <td>Quantity adjusters, promo code box, free delivery threshold progress bar, complete bill calculation.</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>Multi-Step Checkout</td>
+            <td>Customer</td>
+            <td>Address book picker, time slot selector (Morning/Evening), payment method (UPI/Card/COD), confirmation.</td>
+          </tr>
+          <tr>
+            <td>06</td>
+            <td>Live Order Tracking Timeline</td>
+            <td>Customer</td>
+            <td>Milestone status stepper, driver location map, contact button, instant PDF invoice download.</td>
+          </tr>
+          <tr>
+            <td>07</td>
+            <td>Customer Account Dashboard</td>
+            <td>Customer</td>
+            <td>Total savings counter, active coupon drawer, past order history with 1-click reorder, saved address manager.</td>
+          </tr>
+          <tr>
+            <td>08</td>
+            <td>Admin Command & Control Hub</td>
+            <td>Store Admin</td>
+            <td>Real-time gross revenue, order status distribution pie chart, top-selling SKUs, urgent stock warnings.</td>
+          </tr>
+          <tr>
+            <td>09</td>
+            <td>Product Catalog Management</td>
+            <td>Store Admin</td>
+            <td>Table managing 1,200+ SKUs, bulk price editor, image uploader, instant active/draft status switches.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Real-Time Inventory & Stock Manager</td>
+            <td>Warehouse</td>
+            <td>Stock level bars, low-stock threshold triggers, expiry date logs, warehouse aisle mapping, purchase records.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Order Fulfillment & Dispatch Suite</td>
+            <td>Operations</td>
+            <td>Status filtering, side-drawer customer details, packing slip & barcode generation, driver assignment.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Executive Sales & Revenue Analytics</td>
+            <td>Management</td>
+            <td>Category sales breakdown, payment method analytics (UPI/Card/COD), daily/monthly revenue curves.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="card">
+      <h2>4. Technology Stack & Security Architecture</h2>
+      <ul>
+        <li><strong>Frontend:</strong> Next.js 14+ (App Router), React 18+, TypeScript, Tailwind CSS, Lucide React Icons.</li>
+        <li><strong>Backend:</strong> Node.js, Express.js REST API with clean controller/service/repository architecture.</li>
+        <li><strong>Database:</strong> MongoDB Atlas with Mongoose ODM (or PostgreSQL with Prisma ORM).</li>
+        <li><strong>Media & CDN:</strong> Cloudinary CDN for responsive, compressed WebP product image delivery.</li>
+        <li><strong>Push & Alerts:</strong> Firebase Cloud Messaging (FCM) & Twilio for SMS and WhatsApp order notifications.</li>
+        <li><strong>Payments:</strong> Stripe, Razorpay, Unified Payments Interface (UPI), and Cash on Delivery with OTP verification.</li>
+        <li><strong>Security:</strong> Role-Based Access Control (RBAC), JWT authentication in HTTP-Only cookies, Bcrypt 12-round salted password hashing, PCI-DSS Level 1 compliance, and TLS 1.3 HTTPS encryption.</li>
+      </ul>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="card">
+      <h2>5. Master AI PRD & Development Prompt</h2>
+      <p>Use the following prompt to build your next supermarket or retail e-commerce project:</p>
+      <pre id="prompt-code">Act as a Principal Full-Stack Architect and Lead Product Engineer.
+Develop a production-grade, highly scalable, enterprise E-Commerce & Supermarket Retail Management Platform named "RetailPro / Grand Mart" inspired by the NNP Grand Market Management System.
+
+### 1. DESIGN & UX SPECIFICATION
+- Visual Aesthetic: Apple-grade dark glassmorphism. Use deep slate background (#0B0F19, #0F172A), frosted glass surfaces (backdrop-blur-xl, border-white/10), and vibrant accents (Emerald #10B981, Teal #14B8A6, Cyan #06B6D4).
+- Typography: Inter / Plus Jakarta Sans font family.
+- Mobile First: 100% fluid responsive design for mobile (320px+), tablet, laptop, and 4K displays.
+
+### 2. CORE CUSTOMER-FACING CAPABILITIES
+- Homepage: Hero promo carousel, daily deals with countdown timers, circular category quick-links, and bulk order portal.
+- Product Discovery: Real-time search with instant autocomplete, faceted filters (Category, Brand, Price Range Slider, In-Stock), and sorting (Price, Rating, Popularity).
+- Product Details: Multi-image gallery with zoom, weight/volume variant selectors, stock counters, delivery estimates, and instant Buy Now / Add to Cart.
+- Cart & Checkout: Dynamic slide-out drawer, coupon code validator, free delivery threshold progress bar, and a 4-step checkout flow (Address -> Slot -> Payment -> Invoice).
+- Customer Portal: Live order progress stepper, past order ledger with 1-click reorder, and instant PDF invoice download.
+
+### 3. STORE OPERATIONS & ADMIN COMMAND CENTER
+- Executive Dashboard: KPI cards (Revenue, Orders, Deliveries, Low-Stock Warnings), hourly revenue graphs, category distribution pie charts, top-selling SKUs.
+- Inventory Management: Real-time stock counters, low-stock threshold triggers, expiry date logs, warehouse aisle mapping, purchase order history.
+- Order Dispatch Suite: 7-stage fulfillment pipeline (Pending, Packing, Dispatched, Delivered, Cancelled) with packing slip generation and driver assignment.
+- Analytics: Category sales breakdown, payment method analytics (UPI/Card/COD), daily/monthly revenue trends, gross & net profit metrics.
+
+### 4. TECHNICAL ARCHITECTURE
+- Frontend: Next.js 14+ (App Router), React 18+, TypeScript, Tailwind CSS, Lucide Icons, Framer Motion.
+- Backend: Node.js, Express.js REST API with clean controller/service/repository architecture.
+- Database: MongoDB Atlas with Mongoose ODM (or PostgreSQL with Prisma).
+- Security & Auth: RBAC (Customer, Delivery Driver, Store Manager, Super Admin), JWT in HTTP-Only cookies, Bcrypt 12-round password hashing.
+- Cloud & Integrations: Cloudinary CDN for product media, Firebase FCM for push notifications, Stripe/Razorpay/UPI/COD for payment processing.
+
+Deliver clean, production-ready code with complete TypeScript types, error handling, and security validation schemas.</pre>
+      <button class="btn btn-primary" onclick="copyPrompt()">📋 Copy AI Master Prompt</button>
+    </div>
+
+  </div>
+
+  <script>
+    function copyPrompt() {
+      const text = document.getElementById('prompt-code').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Master AI Prompt copied to clipboard successfully!');
+      }).catch(err => {
+        console.error('Could not copy text: ', err);
+      });
+    }
+
+    function downloadMarkdown() {
+      const markdownContent = `# Grand Market Management System (Grand Mart)
+## Complete Case Study, Technical Specification & Master Project Blueprint
+
+### Executive Summary
+* **Project Name:** Grand Market Management System (Grand Mart)
+* **Developed By:** NNP – Network Navigator Pioneers
+* **Category:** Enterprise Retail Marketplace & E-Commerce Management Platform
+* **Industry Domain:** Supermarkets, Grocery Chains, Hypermarkets & Family Retail Stores
+* **Status:** Completed & Production Verified
+* **Platform Support:** Web, Mobile Web, Tablets, Desktop & Point-of-Sale (POS) Integration
+
+---
+
+## 1. Project Overview & Core Mission
+The Grand Market Management System is a modern, full-stack digital shopping and retail operations platform engineered specifically for supermarkets, multi-department grocery chains, and local retail stores.
+
+---
+
+## 2. Visual Aesthetic, UI/UX & Design Philosophy
+* UI Theme: Premium Dark Mode (#0B0F19 background) paired with deep slate surfaces (#0F172A, #1E293B).
+* Accent Colors: Vibrant Emerald Green (#10B981), Radiant Teal (#14B8A6), and Bright Cyan (#06B6D4).
+* Glassmorphic Elements: Frosted translucent cards (backdrop-blur-xl, bg-white/[0.03], border-white/10).
+
+---
+
+## 3. 9 Core System Modules
+1. Product Catalogue Module
+2. Smart Search & Dynamic Filtering Module
+3. Dynamic Shopping Cart Module
+4. Frictionless Multi-Step Checkout Module
+5. Customer Account & Orders Portal
+6. Admin Command Hub & Store Operations
+7. Real-Time Inventory Management Module
+8. Order Fulfillment & Dispatch Suite
+9. Business Intelligence & Revenue Analytics Module
+
+---
+
+## 4. 12 Core Application Screens
+01. Homepage & Marketplace Showcase
+02. Smart Product Listing & Discovery
+03. Interactive Product Details (PDP)
+04. Customer Shopping Cart
+05. Frictionless 4-Step Checkout
+06. Live Order Tracking Timeline
+07. Customer Account Dashboard
+08. Admin Command & Control Hub
+09. Product Catalog Management
+10. Real-Time Inventory & Stock Manager
+11. Order Fulfillment & Dispatch Suite
+12. Executive Sales & Revenue Analytics
+
+---
+
+## 5. Technology Stack & Security Architecture
+* Frontend: Next.js 14+ (App Router), React 18+, TypeScript, Tailwind CSS, Lucide Icons.
+* Backend: Node.js, Express.js REST API Server.
+* Database: MongoDB Atlas with Mongoose ODM.
+* Cloud: Cloudinary CDN, Firebase FCM Notifications, Stripe / Razorpay / UPI / COD.
+* Security: RBAC, JWT in HTTP-Only cookies, Bcrypt 12-round hashing, PCI-DSS Level 1 compliance.
+
+---
+
+## 6. Master AI Prompt
+` + document.getElementById('prompt-code').innerText;
+
+      const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'GRAND_MART_CASE_STUDY_DOCUMENT.md';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
