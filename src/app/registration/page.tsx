@@ -689,10 +689,12 @@ function RegistrationFormContent() {
               <ShieldCheck className="w-4 h-4 text-secondary" /> Direct Support Response
             </h4>
             <p className="text-xs text-gray-300 font-body leading-relaxed mb-3">
-              Need immediate technical assistance regarding an existing project estimate? Contact our chief engineer.
+              {selectedRole === 'student' 
+                ? 'Need guidance or have questions regarding student registration? Reach out to NNP student guidance support.' 
+                : 'Need immediate technical assistance regarding an existing project estimate? Contact our chief engineer.'}
             </p>
             <div className="text-xs font-mono text-secondary">
-              📧 prakasuvelmurugan@gmail.com
+              📧 {selectedRole === 'student' ? 'moahmeedmohai2020@gmail.com' : 'prakasuvelmurugan@gmail.com'}
             </div>
           </div>
         </div>
