@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String    @id @default(cuid())
+  email              String    @unique
+  name               String
+  role               String    @default("USER")
+  passwordHash       String?
+  hashedRefreshToken String?
+  authProvider       String    @default("LOCAL")
+  accountStatus      String    @default("ACTIVE")
+  lastLoginAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([email, accountStatus])
+  @@index([role])
+}
+
+model StudentRegistration {
+  id              String   @id @default(cuid())
+  fullName        String
+  email           String
+  mobile          String
+  college         String
+  department      String
+  currentYear     String
+  graduationYear  String
+  skills          String
+  guidanceAreas   String   // Stored as JSON or comma-separated string
+  helpMessage     String
+  linkedIn        String?
+  github          String?
+  resumeFileName  String?
+  status          String   @default("NEW")
+  type            String   @default("STUDENT_PLACEMENT_GUIDANCE")
+  createdAt       DateTime @default(now())
+
+  @@index([email])
+}

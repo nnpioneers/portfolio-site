@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { DatabaseManager } from '@/lib/server/config/db';
+
 import { AuthService } from '@/lib/server/services/auth.service';
 
 export async function POST(req: NextRequest) {
   try {
-    await DatabaseManager.getInstance().connect();
+
     const token = req.cookies.get('refreshToken')?.value || '';
 
     const authService = new AuthService();

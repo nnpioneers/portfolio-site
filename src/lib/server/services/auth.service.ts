@@ -1,60 +1,87 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UserMongoAdapter } from '../database/adapters/user.adapter';
-import { IUser, UserModel } from '../database/schemas/user.schema';
+import prisma from '../config/db';
 
 export class AuthService {
-  private userAdapter: UserMongoAdapter;
   private readonly JWT_SECRET = process.env.JWT_SECRET || 'nnp_mock_secret';
   private readonly JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'nnp_mock_refresh_secret';
   
-  constructor() {
-    this.userAdapter = new UserMongoAdapter();
-  }
-
-  private generateTokens(user: IUser) {
-    const accessToken = jwt.sign({ id: user._id, role: user.role }, this.JWT_SECRET, { expiresIn: '15m' });
-    const refreshToken = jwt.sign({ id: user._id }, this.JWT_REFRESH_SECRET, { expiresIn: '7d' });
+  private generateTokens(user: { id: string; role: string }) {
+    const accessToken = jwt.sign({ id: user.id, role: user.role }, this.JWT_SECRET, { expiresIn: '15m' });
+    const refreshToken = jwt.sign({ id: user.id }, this.JWT_REFRESH_SECRET, { expiresIn: '7d' });
     return { accessToken, refreshToken };
   }
 
   async register(data: any) {
-    const existingUser = await this.userAdapter.findByEmail(data.email);
+    const existingUser = await prisma.user.findUnique({
+      where: { email: data.email.toLowerCase() }
+    });
+
     if (existingUser) {
       throw { status: 400, code: 'ERR_DUPLICATE_EMAIL', message: 'Email already in use' };
     }
 
-    const hashedPassword = await bcrypt.hash(data.password, 10);
-    const user = await this.userAdapter.create({
-      email: data.email,
-      name: data.name,
-      password: hashedPassword,
-      role: data.role || 'USER'
+    const passwordHash = await bcrypt.hash(data.password, 10);
+    
+    // Create the user first without a refresh token
+    let user = await prisma.user.create({
+      data: {
+        email: data.email.toLowerCase(),
+        name: data.name,
+        passwordHash,
+        role: data.role || 'USER'
+      }
     });
 
-    const { accessToken, refreshToken } = this.generateTokens(user);
+    const { accessToken, refreshToken } = this.generateTokens({ id: user.id, role: user.role });
+    const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
     
-    await this.userAdapter.update(String(user._id), { refreshToken });
+    // Update the user with the hashed refresh token
+    user = await prisma.user.update({
+      where: { id: user.id },
+      data: { hashedRefreshToken }
+    });
 
-    return { accessToken, refreshToken, user: { id: user._id, name: user.name, email: user.email, role: user.role } };
+    return { 
+      accessToken, 
+      refreshToken, 
+      user: { id: user.id, name: user.name, email: user.email, role: user.role } 
+    };
   }
 
   async login(data: any) {
-    const user = await UserModel.findOne({ email: data.email, isDeleted: false }).select('+password').lean().exec() as any;
+    const user = await prisma.user.findFirst({
+      where: { 
+        email: data.email.toLowerCase(),
+        accountStatus: 'ACTIVE'
+      }
+    });
     
-    if (!user || !user.password) {
+    if (!user || !user.passwordHash) {
       throw { status: 401, code: 'ERR_INVALID_CREDENTIALS', message: 'Invalid email or password' };
     }
 
-    const isMatch = await bcrypt.compare(data.password, user.password);
+    const isMatch = await bcrypt.compare(data.password, user.passwordHash);
     if (!isMatch) {
       throw { status: 401, code: 'ERR_INVALID_CREDENTIALS', message: 'Invalid email or password' };
     }
 
-    const { accessToken, refreshToken } = this.generateTokens(user);
-    await this.userAdapter.update(String(user._id), { refreshToken });
+    const { accessToken, refreshToken } = this.generateTokens({ id: user.id, role: user.role });
+    const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
 
-    return { accessToken, refreshToken, user: { id: user._id, name: user.name, email: user.email, role: user.role } };
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { 
+        hashedRefreshToken,
+        lastLoginAt: new Date()
+      }
+    });
+
+    return { 
+      accessToken, 
+      refreshToken, 
+      user: { id: user.id, name: user.name, email: user.email, role: user.role } 
+    };
   }
 
   async refresh(refreshToken: string) {
@@ -65,22 +92,38 @@ export class AuthService {
     try {
       const decoded: any = jwt.verify(refreshToken, this.JWT_REFRESH_SECRET);
       
-      const user = await UserModel.findOne({ _id: decoded.id, isDeleted: false }).select('+refreshToken').lean().exec() as any;
-      if (!user || user.refreshToken !== refreshToken) {
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.id }
+      });
+
+      if (!user || !user.hashedRefreshToken || user.accountStatus !== 'ACTIVE') {
         throw { status: 401, code: 'ERR_INVALID_TOKEN', message: 'Invalid refresh token' };
       }
 
-      const tokens = this.generateTokens(user);
-      await this.userAdapter.update(String(user._id), { refreshToken: tokens.refreshToken });
+      const isMatch = await bcrypt.compare(refreshToken, user.hashedRefreshToken);
+      if (!isMatch) {
+        throw { status: 401, code: 'ERR_INVALID_TOKEN', message: 'Invalid refresh token' };
+      }
+
+      const tokens = this.generateTokens({ id: user.id, role: user.role });
+      const newHashedRefreshToken = await bcrypt.hash(tokens.refreshToken, 10);
+
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { hashedRefreshToken: newHashedRefreshToken }
+      });
 
       return tokens;
     } catch (err) {
-      throw { status: 401, code: 'ERR_EXPIRED_TOKEN', message: 'Refresh token expired' };
+      throw { status: 401, code: 'ERR_EXPIRED_TOKEN', message: 'Refresh token expired or invalid' };
     }
   }
 
   async logout(userId: string) {
-    await this.userAdapter.update(userId, { refreshToken: undefined });
+    await prisma.user.update({
+      where: { id: userId },
+      data: { hashedRefreshToken: null }
+    });
     return true;
   }
 
@@ -90,7 +133,6 @@ export class AuthService {
     if (!process.env.OTP_PROVIDER_API_KEY) {
       throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'OTP Provider is not configured (CONFIGURATION REQUIRED)' };
     }
-    // TODO: Implement actual OTP sending logic
     return true;
   }
 
@@ -98,13 +140,10 @@ export class AuthService {
     if (!process.env.OTP_PROVIDER_API_KEY) {
       throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'OTP Provider is not configured (CONFIGURATION REQUIRED)' };
     }
-    // TODO: Implement actual OTP verification logic
     throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'OTP verification not implemented' };
   }
 
   async forgotPassword(email: string) {
-    // In a real scenario, this would send an email with a reset token
-    // For now, if no email provider is configured, fail clearly.
     throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'Email Provider is not configured (CONFIGURATION REQUIRED)' };
   }
 
@@ -116,7 +155,6 @@ export class AuthService {
     if (!process.env.GOOGLE_CLIENT_SECRET || !process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID) {
       throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'Google OAuth is not configured (CONFIGURATION REQUIRED)' };
     }
-    // TODO: Verify Google token and link/create user
     throw { status: 501, code: 'ERR_NOT_IMPLEMENTED', message: 'Google login not implemented' };
   }
 }

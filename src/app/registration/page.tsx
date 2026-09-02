@@ -151,10 +151,13 @@ function RegistrationFormContent() {
     degree: '',
     department: '',
     yearOfStudy: 'Final Year',
+    graduationYear: '',
     skills: '',
+    guidanceAreas: [] as string[],
     interestedDomain: 'Full Stack Web Development (React/Node)',
     internshipDuration: '2–3 Months',
     githubOrPortfolio: '',
+    linkedInProfile: '',
 
     // Business Partner specific fields
     businessType: 'Enterprise',
@@ -207,7 +210,18 @@ function RegistrationFormContent() {
     const { name, value, type } = e.target;
     if (type === 'checkbox') {
       const target = e.target as HTMLInputElement;
-      setFormData(prev => ({ ...prev, [name]: target.checked }));
+      if (name === 'guidanceAreas') {
+        setFormData(prev => {
+          const currentAreas = prev.guidanceAreas;
+          if (target.checked) {
+            return { ...prev, guidanceAreas: [...currentAreas, value] };
+          } else {
+            return { ...prev, guidanceAreas: currentAreas.filter(a => a !== value) };
+          }
+        });
+      } else {
+        setFormData(prev => ({ ...prev, [name]: target.checked }));
+      }
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
 
@@ -253,7 +267,7 @@ function RegistrationFormContent() {
     ? formData.customBudget 
     : formData.budget;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
@@ -270,6 +284,47 @@ function RegistrationFormContent() {
 
     setLoading(true);
 
+    if (selectedRole === 'student') {
+      try {
+        const response = await fetch('/api/student-registration', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            mobile: formData.phone,
+            college: formData.institution,
+            department: formData.department,
+            currentYear: formData.yearOfStudy,
+            graduationYear: formData.graduationYear,
+            skills: formData.skills,
+            guidanceAreas: formData.guidanceAreas.length > 0 ? formData.guidanceAreas : [formData.interestedDomain],
+            helpMessage: formData.additionalNotes,
+            linkedIn: formData.linkedInProfile,
+            github: formData.githubOrPortfolio,
+            resumeFileName: formData.fileName,
+          })
+        });
+        
+        const data = await response.json();
+        if (!response.ok || !data.success) {
+          setErrorMsg(data.error || 'Submission failed. Please try again.');
+          setLoading(false);
+          return;
+        }
+
+        setLoading(false);
+        setSubmitted(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      } catch (err) {
+        setErrorMsg('Network error. Please try again.');
+        setLoading(false);
+        return;
+      }
+    }
+
+    // Default mock behavior for other roles (Client / Business)
     const newId = `NNP-${Math.floor(1000 + Math.random() * 9000)}`;
     const newSubmissionItem: SubmissionItem = {
       id: newId,
@@ -321,17 +376,17 @@ function RegistrationFormContent() {
           {selectedRole === 'student' ? (
             <div className="bg-purple-950/40 p-6 md:p-8 rounded-2xl border border-purple-500/40 text-left max-w-lg mx-auto mb-10 text-xs md:text-sm space-y-3 shadow-[0_0_30px_rgba(168,85,247,0.2)]">
               <div className="flex items-center gap-2 text-purple-300 font-bold text-base border-b border-purple-500/30 pb-3">
-                <Sparkles className="w-5 h-5 text-purple-400" /> ✅ Pre-Registration Successful!
+                <Sparkles className="w-5 h-5 text-purple-400" /> ✅ Registration Submitted Successfully
               </div>
               <p className="text-gray-200 font-medium text-xs md:text-sm leading-relaxed font-body">
-                Thank you for your interest in joining NNP. Your details have been saved successfully.
+                Thank you for registering with NNP. Our team will review your details and contact you through your registered email if further guidance or participation is available.
               </p>
               <p className="text-gray-300 text-xs leading-relaxed font-body">
-                Our internship program is currently under preparation. Once registrations officially open, we will contact you using your registered email address (<span className="text-white font-semibold">{formData.email}</span>).
+                <strong className="text-white font-semibold">Note:</strong> Internship registrations are currently not open. We will announce the official internship program when it launches.
               </p>
               <div className="flex justify-between border-t border-purple-500/30 pt-3 text-xs">
-                <span className="text-gray-400">Waiting List Status:</span>
-                <span className="font-mono text-purple-300 font-bold">#NNP-INTERN-PRE</span>
+                <span className="text-gray-400">Registered Email:</span>
+                <span className="font-mono text-purple-300 font-bold">{formData.email}</span>
               </div>
             </div>
           ) : selectedRole === 'business' ? (
@@ -468,14 +523,14 @@ function RegistrationFormContent() {
                 <Clock className="w-3 h-3 text-purple-400" /> Coming Soon
               </div>
               <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-                Internship Pre-Registration
+                Student Registration
               </h3>
               <p className="text-gray-400 text-sm font-body leading-relaxed mb-6">
-                Pre-register for upcoming NNP internships, tech training, mentorship, and student projects.
+                Join the NNP Student Guidance Program and get the right support for your placement preparation journey.
               </p>
             </div>
             <div className="flex items-center gap-2 text-xs font-semibold text-purple-400 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-              Join Waiting List <ArrowRight className="w-4 h-4" />
+              Register Now <ArrowRight className="w-4 h-4" />
             </div>
           </div>
 
@@ -653,12 +708,12 @@ function RegistrationFormContent() {
             </div>
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-3">
               {selectedRole === 'client' && <>Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-accent to-purple-400">Project</span></>}
-              {selectedRole === 'student' && <>Student & <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Internship Portal</span></>}
+              {selectedRole === 'student' && <>Student <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Registration</span></>}
               {selectedRole === 'business' && <>Enterprise <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">Partnerships</span></>}
             </h1>
             <p className="text-gray-400 font-body text-sm md:text-base">
               {selectedRole === 'client' && 'Select from preset offerings or type custom requirements manually. Senior engineering team will review within 24-48 hours.'}
-              {selectedRole === 'student' && 'Join NNP tech talent pipeline. Learn from industry engineers and build live projects.'}
+              {selectedRole === 'student' && 'Prepare Better. Learn Better. Get Placement Ready.'}
               {selectedRole === 'business' && 'Partner with NNP for software development outsourcing and long-term enterprise solutions.'}
             </p>
           </div>
@@ -1226,10 +1281,10 @@ function RegistrationFormContent() {
               <form onSubmit={handleSubmit} className="glass-card p-8 md:p-10 rounded-3xl border border-white/10 relative shadow-2xl space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
                   <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                    <GraduationCap className="w-6 h-6 text-purple-400" /> Internship Pre-Registration
+                    <GraduationCap className="w-6 h-6 text-purple-400" /> Student Registration
                   </h2>
                   <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono font-semibold">
-                    Join Waiting List
+                    Placement Guidance
                   </span>
                 </div>
 
@@ -1251,60 +1306,59 @@ function RegistrationFormContent() {
                     <input required type="text" name="institution" value={formData.institution} onChange={handleChange} placeholder="e.g. Anna University / DSEC" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Degree *</label>
-                    <input required type="text" name="degree" value={formData.degree} onChange={handleChange} placeholder="e.g. B.Tech / B.E. / B.Sc / BCA" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
-                  </div>
-                  <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Department / Specialization *</label>
                     <input required type="text" name="department" value={formData.department} onChange={handleChange} placeholder="e.g. Computer Science / AI & DS / IT" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Year of Study *</label>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Current Year *</label>
                     <select name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all cursor-pointer">
                       <option value="1st Year" className="bg-slate-900 text-white">1st Year</option>
                       <option value="2nd Year" className="bg-slate-900 text-white">2nd Year</option>
                       <option value="3rd Year" className="bg-slate-900 text-white">3rd Year</option>
+                      <option value="4th Year" className="bg-slate-900 text-white">4th Year</option>
                       <option value="Final Year" className="bg-slate-900 text-white">Final Year</option>
-                      <option value="Passed Out / Recent Graduate" className="bg-slate-900 text-white">Passed Out / Recent Graduate</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Interested Domain *</label>
-                    <select name="interestedDomain" value={formData.interestedDomain} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all cursor-pointer">
-                      <option value="Full Stack Web Development (React/Node)" className="bg-slate-900 text-white">Full Stack Web Development (React/Node)</option>
-                      <option value="Artificial Intelligence & Machine Learning" className="bg-slate-900 text-white">Artificial Intelligence & Machine Learning</option>
-                      <option value="Mobile Application Development" className="bg-slate-900 text-white">Mobile Application Development</option>
-                      <option value="UI/UX & Product Design" className="bg-slate-900 text-white">UI/UX & Product Design</option>
-                      <option value="Data Analytics & Science" className="bg-slate-900 text-white">Data Analytics & Science</option>
-                      <option value="Cloud Engineering & DevOps" className="bg-slate-900 text-white">Cloud Engineering & DevOps</option>
+                      <option value="Recently Graduated" className="bg-slate-900 text-white">Recently Graduated</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Technical Skills & Competencies *</label>
-                    <input required type="text" name="skills" value={formData.skills} onChange={handleChange} placeholder="e.g. Python, React, JavaScript, HTML/CSS, SQL, Git" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Graduation Year *</label>
+                    <input required type="text" name="graduationYear" value={formData.graduationYear} onChange={handleChange} placeholder="e.g. 2026" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Expected Internship Duration *</label>
-                    <select name="internshipDuration" value={formData.internshipDuration} onChange={handleChange} className="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all cursor-pointer">
-                      <option value="1 Month" className="bg-slate-900 text-white">1 Month</option>
-                      <option value="2–3 Months" className="bg-slate-900 text-white">2–3 Months</option>
-                      <option value="6 Months" className="bg-slate-900 text-white">6 Months</option>
-                      <option value="Flexible" className="bg-slate-900 text-white">Flexible</option>
-                    </select>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Current Skills / Technologies *</label>
+                    <input required type="text" name="skills" value={formData.skills} onChange={handleChange} placeholder="e.g. C, C++, Java, Python, React, SQL" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">GitHub / LinkedIn / Portfolio Link (Optional)</label>
-                  <input type="url" name="githubOrPortfolio" value={formData.githubOrPortfolio} onChange={handleChange} placeholder="https://github.com/yourhandle or LinkedIn profile URL" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">What kind of placement guidance are you looking for? *</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {['Aptitude Preparation', 'Coding Preparation', 'Data Structures & Algorithms', 'Technical Interview Preparation', 'HR Interview Preparation', 'Resume Building', 'Communication Skills', 'Mock Interviews', 'Overall Placement Preparation'].map((area) => (
+                      <label key={area} className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer bg-white/5 p-3 rounded-xl border border-white/10 hover:border-purple-400/50 transition-colors">
+                        <input type="checkbox" name="guidanceAreas" value={area} checked={formData.guidanceAreas.includes(area)} onChange={handleChange} className="w-4 h-4 rounded text-purple-400 focus:ring-purple-400 cursor-pointer" />
+                        {area}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">LinkedIn Profile (Optional)</label>
+                    <input type="url" name="linkedInProfile" value={formData.linkedInProfile} onChange={handleChange} placeholder="https://linkedin.com/in/yourprofile" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">GitHub / Portfolio (Optional)</label>
+                    <input type="url" name="githubOrPortfolio" value={formData.githubOrPortfolio} onChange={handleChange} placeholder="https://github.com/yourhandle" className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Why do you want to intern at NNP? *</label>
-                  <textarea required rows={4} name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} placeholder="Tell us about your background, projects, interest in technology, and what you hope to achieve during an NNP internship..." className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Tell us what you need help with *</label>
+                  <textarea required rows={4} name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} placeholder="Tell us about your current preparation, challenges, or what you would like guidance with." className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
                 </div>
 
                 <div>
@@ -1337,9 +1391,9 @@ function RegistrationFormContent() {
                 </div>
 
                 <div className="flex items-start bg-white/5 p-4 rounded-2xl border border-white/10">
-                  <input required type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} id="agreeTermsStudent" className="mt-1 w-4 h-4 rounded text-purple-400 focus:ring-purple-400 cursor-pointer" />
+                  <input required type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} id="agreeTermsStudent" className="mt-1 w-4 h-4 rounded text-purple-400 focus:ring-purple-400 cursor-pointer shrink-0" />
                   <label htmlFor="agreeTermsStudent" className="ml-3 text-xs md:text-sm text-gray-300 cursor-pointer">
-                    I confirm that the information provided is accurate and I agree to join the NNP Internship waiting list.
+                    I confirm that the information provided is accurate and I agree to register with NNP for placement guidance.
                   </label>
                 </div>
 
@@ -1347,17 +1401,17 @@ function RegistrationFormContent() {
                   <button type="submit" disabled={loading} className="w-full btn-magnetic bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-4 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)] disabled:opacity-70">
                     {loading ? (
                       <>
-                        <Loader2 className="w-5 h-5 animate-spin" /> Saving Pre-Registration...
+                        <Loader2 className="w-5 h-5 animate-spin" /> Saving Registration...
                       </>
                     ) : (
                       <>
-                        Join Waiting List (Pre-Register Now) <ArrowRight className="w-5 h-5" />
+                        Register for Student Guidance <ArrowRight className="w-5 h-5" />
                       </>
                     )}
                   </button>
 
                   <p className="text-[11px] text-gray-400 text-center font-body">
-                    📌 This is a pre-registration only. Internship offers are <strong className="text-white font-semibold">not currently open</strong>. Selected candidates will receive an email once registrations begin.
+                    📌 This registration is for placement guidance. Internship applications are <strong className="text-white font-semibold">not currently open</strong>.
                   </p>
                 </div>
               </form>
