@@ -1359,8 +1359,18 @@ function RegistrationFormContent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Tell us what you need help with *</label>
-                  <textarea required rows={4} name="additionalNotes" value={formData.additionalNotes} onChange={handleChange} placeholder="Tell us about your current preparation, challenges, or what you would like guidance with." className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" />
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2 flex items-center gap-1.5">
+                    <MessageSquare className="w-3.5 h-3.5 text-purple-400" />
+                    Tell us what you need help with (Optional)
+                  </label>
+                  <textarea 
+                    rows={4} 
+                    name="additionalNotes" 
+                    value={formData.additionalNotes} 
+                    onChange={handleChange} 
+                    placeholder="Tell us what help you expect from us, any challenges you are facing, or anything you would like to share with our team." 
+                    className="w-full bg-white/5 border border-white/15 rounded-xl p-4 text-sm text-white placeholder-gray-500 focus:border-purple-400 focus:ring-1 focus:ring-purple-400 transition-all" 
+                  />
                 </div>
 
                 <div>
